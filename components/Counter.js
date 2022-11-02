@@ -7,6 +7,7 @@ import {
   Image,
   TextInput,
 } from "react-native";
+import ArithmeticIcon from "./ArithmeticIcon";
 
 const Counter = (props) => {
   const [timesPressed, setTimesPressed] = useState(0);
@@ -17,27 +18,13 @@ const Counter = (props) => {
     }
   };
 
+  const configurePositiveCounter = (current) => {
+    setTimesPressed((current) => current + 1);
+  };
+
   return (
     <View style={styles.container}>
-      <Pressable
-        onPress={() => {
-          setTimesPressed((current) => current + 1);
-        }}
-        style={({ pressed }) => [
-          {
-            backgroundColor: pressed ? "rgb(210, 230, 255)" : "white",
-          },
-          styles.wrapperCustom,
-        ]}
-      >
-        {({ pressed }) => (
-          // <Text style={styles.text}>{pressed ? "Pressed!" : "Press Me"}</Text>
-          <Image
-            style={styles.icon}
-            source={require("../assets/add-icon.png")}
-          />
-        )}
-      </Pressable>
+      <ArithmeticIcon setTimesPressed={setTimesPressed} arithmeticCounter={configurePositiveCounter} filePath="../assets/add-icon.png"/>
       <View style={styles.logBox}>
         <TextInput
           style={{ ...styles.text, ...styles.textColor }}
@@ -57,7 +44,6 @@ const Counter = (props) => {
         ]}
       >
         {({ pressed }) => (
-          // <Text style={styles.text}>{pressed ? "Pressed!" : "Press Me"}</Text>
           <Image
             style={styles.icon}
             source={require("../assets/minus-icon.png")}
@@ -85,7 +71,7 @@ const styles = StyleSheet.create({
     fontSize: 30,
     keyboardType: "number-pad",
     autoCapitalize: "none",
-    maxLength: 2
+    maxLength: 2,
   },
   textColor: {
     color: "white",
@@ -100,7 +86,6 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     marginTop: -16,
     marginBottom: -16,
-    
   },
 });
 
