@@ -1,25 +1,34 @@
-import React, { useState } from "react";
-import { View, Text, StyleSheet, Image, Button, Pressable } from "react-native";
+import React from "react";
+import { StyleSheet, Image, Pressable } from "react-native";
 
-// import Colors from "../constants/colors";
-import Card from "./Card";
-import Counter from "./Counter";
+import Colors from "../constants/colors";
+import Imports from "../constants/imports";
 
 const ArithmeticIcon = (props) => {
-  const { setTimesPressed, arithmeticCounter, filePath } = props;
+  const { setTimesPressed, handleOnPressArithmeticIcon, iconType } = props;
+
+  const filePathHandler = (props) => {
+    if (iconType == "add") {
+      return (
+        <Image style={styles.icon} source={Imports.addIcon} />
+      );
+    } else {
+      return (
+        <Image style={styles.icon} source={Imports.minusIcon} />
+      );
+    }
+  };
   return (
     <Pressable
-      onPress={arithmeticCounter}
+      onPress={handleOnPressArithmeticIcon}
       style={({ pressed }) => [
         {
-          backgroundColor: pressed ? "rgb(210, 230, 255)" : "white",
+          backgroundColor: pressed ? Colors.pressed : Colors.white,
         },
         styles.wrapperCustom,
       ]}
     >
-      {({ pressed }) => (
-        <Image style={styles.icon} source={require("../assets/add-icon.png")} />
-      )}
+      {filePathHandler}
     </Pressable>
   );
 };

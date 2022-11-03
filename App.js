@@ -6,21 +6,13 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import Card from "./components/Card";
 import Counter from "./components/Counter";
-import UpperCard from "./components/UpperCard";
+import Top from "./components/Top";
 
 function HomeScreen() {
 
   return (
     <View style={styles.screen}>
-      <UpperCard />
-      <Card style={styles.cardContainer}>
-        <Text style={{ ...styles.textSizePrimary, ...styles.textColor }}>
-          4.99g
-        </Text>
-        <Text style={{ ...styles.textSizeSecondary, ...styles.textColor }}>
-          Per copy
-        </Text>
-      </Card>
+      <Top />
     </View>
   );
 }
@@ -66,26 +58,6 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 10,
     alignItems: "center",
-  },
-  cardContainer: {
-    margintop: -16,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    width: 400,
-    height: 100,
-    borderBottomLeftRadius: 10,
-    borderBottomRightRadius: 10,
-    backgroundColor: "#8bd9fb",
-  },
-  textSizePrimary: {
-    fontSize: 30,
-  },
-  textSizeSecondary: {
-    fontSize: 15,
-  },
-  textColor: {
-    color: "white",
   },
 });
 
