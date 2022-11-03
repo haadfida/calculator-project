@@ -4,12 +4,30 @@ import React, { useState } from "react";
 import { View, Text, StyleSheet, Image, Button, Pressable } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import Card from "./components/Card";
-import Counter from "./components/Counter";
 import Top from "./components/Top";
+import { useFonts } from "expo-font";
+import {
+  Montserrat_100Thin,
+  Montserrat_100Thin_Italic,
+  Montserrat_200ExtraLight,
+  Montserrat_200ExtraLight_Italic,
+  Montserrat_300Light,
+  Montserrat_300Light_Italic,
+  Montserrat_400Regular,
+  Montserrat_400Regular_Italic,
+  Montserrat_500Medium,
+  Montserrat_500Medium_Italic,
+  Montserrat_600SemiBold,
+  Montserrat_600SemiBold_Italic,
+  Montserrat_700Bold,
+  Montserrat_700Bold_Italic,
+  Montserrat_800ExtraBold,
+  Montserrat_800ExtraBold_Italic,
+  Montserrat_900Black,
+  Montserrat_900Black_Italic,
+} from "@expo-google-fonts/montserrat";
 
 function HomeScreen() {
-
   return (
     <View style={styles.screen}>
       <Top />
@@ -20,6 +38,26 @@ function HomeScreen() {
 const Stack = createStackNavigator();
 // https://stackoverflow.com/questions/66967903/undefined-is-not-an-object-evaluating-route-key-react-navigation
 function App() {
+  let [fontsLoaded, error] = useFonts({
+    Montserrat_100Thin,
+    Montserrat_100Thin_Italic,
+    Montserrat_200ExtraLight,
+    Montserrat_200ExtraLight_Italic,
+    Montserrat_300Light,
+    Montserrat_300Light_Italic,
+    Montserrat_400Regular,
+    Montserrat_400Regular_Italic,
+    Montserrat_500Medium,
+    Montserrat_500Medium_Italic,
+    Montserrat_600SemiBold,
+    Montserrat_600SemiBold_Italic,
+    Montserrat_700Bold,
+    Montserrat_700Bold_Italic,
+    Montserrat_800ExtraBold,
+    Montserrat_800ExtraBold_Italic,
+    Montserrat_900Black,
+    Montserrat_900Black_Italic,
+  });
   return (
     <NavigationContainer>
       <Stack.Navigator>
@@ -41,9 +79,7 @@ function App() {
                   },
                 ]}
               >
-                <Image
-                  source={require("./assets/menu-icon.png")}
-                />
+                <Image source={require("./assets/menu-icon.png")} />
               </Pressable>
             ),
           })}

@@ -79,9 +79,11 @@ const styles = StyleSheet.create({
   },
   textSizePrimary: {
     fontSize: 30,
+    fontFamily: "Montserrat_400Regular",
   },
   textSizeSecondary: {
     fontSize: 15,
+    fontFamily: "Montserrat_400Regular",
   },
   textColor: {
     color: "white",

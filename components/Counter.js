@@ -60,6 +60,7 @@ const styles = StyleSheet.create({
   },
   textColor: {
     color: "white",
+    fontFamily: "Montserrat_400Regular",
   },
   sheetBox: {
     padding: 20,
