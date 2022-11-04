@@ -28,7 +28,9 @@ const Counter = (props) => {
         <Input style={{ ...styles.text, ...styles.textColor }}>
           {props.configureCounter(timesPressed)}
         </Input>
-        <Text style={styles.textColor}>Sheets</Text>
+        <Text style={{ ...styles.textSecondary, ...styles.textColor }}>
+          Sheets
+        </Text>
       </View>
       <ArithmeticIcon
         setTimesPressed={setTimesPressed}
@@ -43,35 +45,36 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: "center",
     alignItems: "center",
-  },
-  wrapperCustom: {
-    borderRadius: 20,
-    padding: 6,
-    width: 30,
-    justifyContent: "center",
-    alignItems: "center",
-    zIndex: 1,
+    width: 90,
   },
   text: {
-    fontSize: 30,
+    fontSize: 25,
     keyboardType: "number-pad",
     autoCapitalize: "none",
     maxLength: 2,
+    paddingLeft: 4,
+    fontWeight: "bold",
   },
   textColor: {
     color: "white",
     fontFamily: "Montserrat_400Regular",
+    fontWeight: "bold",
+  },
+  textSecondary: {
+    fontSize: 10,
+    paddingBottom: 8,
   },
   sheetBox: {
-    padding: 20,
+    padding: 15,
+    height: "60%",
     borderWidth: StyleSheet.hairlineWidth,
     borderColor: Colors.cardBorderColor,
     backgroundColor: Colors.cardBackgroundColor,
-    justifyContent: "center",
+    justifyContent: "space-around",
     alignItems: "center",
-    borderRadius: 20,
+    borderRadius: 15,
     marginTop: -16,
-    marginBottom: -16,
+    marginBottom: -15,
   },
 });
 

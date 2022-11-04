@@ -5,6 +5,7 @@ import { View, Text, StyleSheet, Image, Button, Pressable } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import Top from "./components/Top";
+import Middle from "./components/Middle";
 import { useFonts } from "expo-font";
 import {
   Montserrat_100Thin,
@@ -26,11 +27,13 @@ import {
   Montserrat_900Black,
   Montserrat_900Black_Italic,
 } from "@expo-google-fonts/montserrat";
+import { Colors } from "react-native/Libraries/NewAppScreen";
 
 function HomeScreen() {
   return (
     <View style={styles.screen}>
       <Top />
+      <Middle />
     </View>
   );
 }
@@ -58,6 +61,10 @@ function App() {
     Montserrat_900Black,
     Montserrat_900Black_Italic,
   });
+
+  if (!fontsLoaded) {
+    return <HomeScreen />;
+  }
   return (
     <NavigationContainer>
       <Stack.Navigator>
@@ -94,6 +101,7 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 10,
     alignItems: "center",
+    backgroundColor: Colors.white
   },
 });
 
