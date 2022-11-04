@@ -1,12 +1,16 @@
 // In App.js in a new project
 
-import React, { useState } from "react";
+import React, { createContext } from "react";
 import { View, Text, StyleSheet, Image, Button, Pressable } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import Top from "./components/Top";
 import Middle from "./components/Middle";
+import Bottom from "./components/Bottom";
 import { useFonts } from "expo-font";
+
+export const Values = createContext();
+
 import {
   Montserrat_100Thin,
   Montserrat_100Thin_Italic,
@@ -31,10 +35,15 @@ import { Colors } from "react-native/Libraries/NewAppScreen";
 
 function HomeScreen() {
   return (
-    <View style={styles.screen}>
-      <Top />
-      <Middle />
-    </View>
+    <>
+      <Values.Provider value={"Archna"}>
+        <View style={styles.screen}>
+          <Top />
+          <Middle />
+          <Bottom />
+        </View>
+      </Values.Provider>
+    </>
   );
 }
 
@@ -101,7 +110,7 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 10,
     alignItems: "center",
-    backgroundColor: Colors.white
+    backgroundColor: Colors.white,
   },
 });
 

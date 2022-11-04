@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, createContext  } from "react";
 import { View, Text, StyleSheet, Image } from "react-native";
+import { Values } from "./Middle";
 
 import Colors from "../constants/colors";
 import Card from "./Card";
@@ -86,6 +87,8 @@ const styles = StyleSheet.create({
   textSizeSecondary: {
     fontSize: 12,
     fontFamily: "Montserrat_400Regular",
+    fontWeight: 'bold',
+
   },
   textColor: {
     color: "white",
@@ -93,3 +96,4 @@ const styles = StyleSheet.create({
 });
 
 export default Top;
+export { Values };

@@ -1,44 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { View, StyleSheet, Text, FlatList, Pressable } from "react-native";
 
 import Card from "./Card";
 import Colors from "../constants/colors";
+import Size from "../constants/size";
+import { Values } from "./Top";
 
 const Middle = (props) => {
-  const [selected, setSelected] = useState(false);
+
+  const [selected, setSelected] = useState("DIN A");
   const [selectedSecondary, setSelectedSecondary] = useState(false);
 
-  const DATA = [
-    {
-      id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
-      title: "A2",
-    },
-    {
-      id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
-      title: "A3",
-    },
-    {
-      id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28b2",
-      title: "A4",
-    },
-    {
-      id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f43",
-      title: "A5",
-    },
-    {
-      id: "3ac68afa-c605-48d3-a4f8-fbd91aa97f43",
-      title: "A6",
-    },
-    {
-      id: "58694a0f-3da2-471f-bd96-145571e29d72",
-      title: "DIN LANG",
-    },
-  ];
-
+  const handleOnSelectionSecondary = (title) => {
+    setSelectedSecondary(title);
+  };
   const Item = ({ title }) => (
     <View style={styles.item}>
       <Text
-        onPress={() => setSelectedSecondary(title)}
+        onPress={() => handleOnSelectionSecondary(title)}
         style={{
           color: selectedSecondary == title ? "#95d4e7" : Colors.black,
         }}
@@ -74,8 +53,10 @@ const Middle = (props) => {
       name: "JIS B",
     },
   ];
-  const renderItem = ({ item }) => <Item title={item.title} />;
-
+  const renderItem = ({ item }) => <Item title={item} />;
+  const handleOnSelection = (button) => {
+    setSelected(button.name);
+  };
   return (
     <View>
       <Card style={styles.middleContainer}>
@@ -83,7 +64,7 @@ const Middle = (props) => {
           {buttons.map((button) => {
             return (
               <Pressable
-                onPress={() => setSelected(button.name)}
+                onPress={() => handleOnSelection(button)}
                 style={({ pressed }) => [
                   {
                     backgroundColor:
@@ -111,7 +92,7 @@ const Middle = (props) => {
       </Card>
       <Card style={styles.cardContainer}>
         <FlatList
-          data={DATA}
+          data={Object.keys(Size[selected.replace(/\s/g, "")])}
           renderItem={renderItem}
           keyExtractor={(item) => item.id}
           horizontal={true}
@@ -126,8 +107,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     marginTop: 5,
-    height: "40%",
-    paddingVertical: 10,
+    height: 125,
+    paddingVertical: 0,
     backgroundColor: Colors.middleContainer,
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
@@ -138,7 +119,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     width: 400,
-    height: "15%",
+    height: 50,
     paddingVertical: 10,
     borderBottomLeftRadius: 10,
     borderBottomRightRadius: 10,
