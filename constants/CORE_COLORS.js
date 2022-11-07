@@ -12,4 +12,5 @@ export default {
   sliderBackgroundColor: "#3c4160",
   bottomCardContainer: "#3c4160",
   bottomSliderText: "#4c5171",
+  sliderTintColor: "#69cbfa",
 };

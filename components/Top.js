@@ -1,24 +1,24 @@
-import React, { useState, createContext } from "react";
+import React from "react";
 import { View, Text, StyleSheet, Image } from "react-native";
-import { Values } from "./Middle";
 
-import Colors from "../constants/colors";
+import CORE_COLORS from "../constants/CORE_COLORS";
+import CORE_THEME from "../constants/CORE_THEME";
 import Card from "./Card";
 import Counter from "./Counter";
 import Imports from "../constants/imports";
 
 const Top = (props) => {
-  const { currentCount, setCurrentCount, weight } = props;
+  const { currentSheetsCount, onSheetCountUpdated, weight } = props;
   const renderPaperContent = (props) => {
-    if (currentCount <= 1 || currentCount < 5) {
+    if (currentSheetsCount <= 1 || currentSheetsCount < 5) {
       sourcePaperContent = Imports.lessThanFive;
-    } else if (currentCount >= 5 && currentCount < 10) {
+    } else if (currentSheetsCount >= 5 && currentSheetsCount < 10) {
       sourcePaperContent = Imports.greaterthanFour;
-    } else if (currentCount >= 10 && currentCount < 25) {
+    } else if (currentSheetsCount >= 10 && currentSheetsCount < 25) {
       sourcePaperContent = Imports.greaterthanNine;
-    } else if (currentCount >= 25 && currentCount < 50) {
+    } else if (currentSheetsCount >= 25 && currentSheetsCount < 50) {
       sourcePaperContent = Imports.greaterthanTwentyFour;
-    } else if (currentCount >= 50) {
+    } else if (currentSheetsCount >= 50) {
       sourcePaperContent = Imports.greaterthanFortyNine;
     }
     return <Image source={sourcePaperContent} />;
@@ -31,7 +31,7 @@ const Top = (props) => {
     } else {
       textLog = 0;
     }
-    setCurrentCount(timesPressed);
+    onSheetCountUpdated(timesPressed);
 
     return textLog;
   };
@@ -58,13 +58,13 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    marginTop: 20,
-    width: 400,
-    height: 150,
-    backgroundColor: Colors.topBackgroundColor,
-    maxHeight: "80%",
-    borderTopLeftRadius: 10,
-    borderTopRightRadius: 10,
+    marginTop: CORE_THEME.TopContainerMarginTop,
+    width: CORE_THEME.TopContainerMarginTopWidth,
+    height: CORE_THEME.TopContainerMarginTopHeight,
+    backgroundColor: CORE_COLORS.topBackgroundColor,
+    maxHeight: CORE_THEME.TopContainerMarginTopMaxHeight,
+    borderTopLeftRadius: CORE_THEME.TopContainerMarginTopBorderTopLeftRadius,
+    borderTopRightRadius: CORE_THEME.borderTopRightRadius,
   },
   cardContainer: {
     margintop: -16,
@@ -74,9 +74,9 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     width: 400,
     height: 60,
-    borderBottomLeftRadius: 10,
-    borderBottomRightRadius: 10,
-    backgroundColor: Colors.cardTopContainer,
+    borderBottomLeftRadius: 10, //replace
+    borderBottomRightRadius: 10, //replace
+    backgroundColor: CORE_COLORS.cardTopContainer,
   },
   textSizePrimary: {
     fontSize: 18,
@@ -94,4 +94,3 @@ const styles = StyleSheet.create({
 });
 
 export default Top;
-export { Values };

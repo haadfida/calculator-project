@@ -1,18 +1,14 @@
-import React, { useState, useContext } from "react";
-import { SafeAreaView, StyleSheet, Text, View } from "react-native";
+import React, { Fragment } from "react";
+import { StyleSheet, Text, View } from "react-native";
 import Slider from "@react-native-community/slider";
-import Card from "./Card";
-import { Values } from "./Middle";
 
-
-import Colors from "../constants/colors";
+import CORE_COLORS from "../constants/CORE_COLORS";
 
 const SliderContainer = (props) => {
-  const { text, value, unit, maxValue, handleOnChangeLength } = props;
-
+  const { text, value, unit, maxValue, onSliderPress } = props;
 
   return (
-    <View>
+    <Fragment>
       <View style={styles.headers}>
         <Text style={styles.textColor}>{text}</Text>
         <View style={styles.border}>
@@ -27,12 +23,12 @@ const SliderContainer = (props) => {
         minimumValue={0}
         step={1}
         maximumValue={maxValue}
-        minimumTrackTintColor="#69cbfa"
-        maximumTrackTintColor="#69cbfa"
-        thumbTintColor="#69cbfa"
-        onValueChange={handleOnChangeLength}
+        minimumTrackTintColor={CORE_COLORS.sliderTintColor}
+        maximumTrackTintColor={CORE_COLORS.sliderTintColor}
+        thumbTintColor={CORE_COLORS.sliderTintColor}
+        onValueChange={onSliderPress}
       />
-    </View>
+    </Fragment>
   );
 };
 
@@ -43,7 +39,7 @@ const styles = StyleSheet.create({
     margin: 10,
   },
   textColor: {
-    color: Colors.white,
+    color: CORE_COLORS.white,
     fontFamily: "Montserrat_400Regular",
     fontWeight: "bold",
   },
@@ -51,18 +47,18 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderRadius: 15,
     padding: 10,
-    backgroundColor: Colors.bottomSliderText,
+    backgroundColor: CORE_COLORS.bottomSliderText,
   },
   cardContainer: {
     margin: 10,
     width: 400,
     borderRadius: 10,
-    backgroundColor: Colors.SliderContainerCardContainer,
+    backgroundColor: CORE_COLORS.SliderContainerCardContainer,
   },
   slider: {
     width: "100%",
     height: 40,
-    backgroundColor: Colors.sliderBackgroundColor,
+    backgroundColor: CORE_COLORS.sliderBackgroundColor,
   },
 });
 

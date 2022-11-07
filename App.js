@@ -1,104 +1,94 @@
 // In App.js in a new project
 
 import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet, Image, Button, Pressable } from "react-native";
+import { View, StyleSheet, Image, Pressable } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import Top from "./components/Top";
 import Middle from "./components/Middle";
 import Bottom from "./components/Bottom";
 import { useFonts } from "expo-font";
-import Size from "./constants/size";
-import {
-  Montserrat_100Thin,
-  Montserrat_100Thin_Italic,
-  Montserrat_200ExtraLight,
-  Montserrat_200ExtraLight_Italic,
-  Montserrat_300Light,
-  Montserrat_300Light_Italic,
-  Montserrat_400Regular,
-  Montserrat_400Regular_Italic,
-  Montserrat_500Medium,
-  Montserrat_500Medium_Italic,
-  Montserrat_600SemiBold,
-  Montserrat_600SemiBold_Italic,
-  Montserrat_700Bold,
-  Montserrat_700Bold_Italic,
-  Montserrat_800ExtraBold,
-  Montserrat_800ExtraBold_Italic,
-  Montserrat_900Black,
-  Montserrat_900Black_Italic,
-} from "@expo-google-fonts/montserrat";
+import PaperSizes from "./constants/paperSize";
+
 import { Colors } from "react-native/Libraries/NewAppScreen";
 
 function HomeScreen() {
   const [length, setLength] = useState(0);
   const [width, setWidth] = useState(0);
-  const [gram, setGram] = useState(0);
-  const [currentCount, setCurrentCount] = useState(0);
+  const [grammage, setGrammage] = useState(0);
+  const [currentSheetsCount, setCurrentSheetsCount] = useState(0);
   const [weight, setWeight] = useState(0);
 
-  const [selected, setSelected] = useState("DIN A");
-  const [selectedSecondary, setSelectedSecondary] = useState(false);
+  const [selectedPaperType, setSelectedPaperTyped] = useState("DIN A");
+  const [selectedPaperSize, setSelectedPaperSize] = useState("");
 
-  const handleOnSelection = (button) => {
-    setSelected(button.name);
-    setSelectedSecondary(false);
+  useEffect(() => {
+    handleWeight();
+  });
+
+  const handleOnSelectedPaperType = (button) => {
+    setSelectedPaperTyped(button.name);
+    setSelectedPaperSize(false);
   };
 
-  const weightHandler = () => {
-    setWeight(length * width * 0.01 * 0.01 * gram * currentCount);
+  const handleWeight = () => {
+    setWeight(length * width * 0.01 * 0.01 * grammage * currentSheetsCount);
   };
-
-  const handleOnSelectionSecondary = (title) => {
-    setSelectedSecondary(title);
-    if ([selectedSecondary] in Size[selected.replace(/\s/g, "")]) {
-      setLength(Size[selected.replace(/\s/g, "")][selectedSecondary]["length"]);
-      setWidth(Size[selected.replace(/\s/g, "")][selectedSecondary]["width"]);
-      setGram(Size[selected.replace(/\s/g, "")][selectedSecondary]["gram"]);
-      setWeight(parseInt(length * width * 0.01 * 0.01 * gram * currentCount));
+  let papersizelist = PaperSizes[selectedPaperType.replace(/\s/g, "")];
+  // console.log(papersizelist);
+  const handleOnSelectionPaperSize = (title) => {
+    setSelectedPaperSize(title);
+    if ([selectedPaperSize] in papersizelist) {
+      setLength(
+        papersizelist[selectedPaperSize]["length"]
+      );
+      setWidth(
+        papersizelist[selectedPaperSize]["width"]
+      );
+      setGrammage(
+        papersizelist[selectedPaperSize]["gram"]
+      );
+      setWeight(
+        parseInt(length * width * 0.01 * 0.01 * grammage * currentSheetsCount)
+      );
     }
   };
 
-  const handleOnChangeLength = (val) => {
+  const handleOnLengthChanged = (val) => {
     setLength(val);
   };
 
-  const handleOnChangeWidth = (val) => {
+  const handleOnWidthChanged = (val) => {
     setWidth(val);
   };
 
-  const handleOnChangeGram = (val) => {
-    setGram(val);
+  const handleOnGrammmageChanged = (val) => {
+    setGrammage(val);
   };
-
-  useEffect(() => {
-    setWeight(parseInt(length * width * 0.01 * 0.01 * gram * currentCount));
-  });
 
   return (
     <View style={styles.screen}>
       <Top
-        currentCount={currentCount}
-        setCurrentCount={setCurrentCount}
-        weightHandler={weightHandler}
+        currentSheetsCount={currentSheetsCount}
+        onSheetCountUpdated={setCurrentSheetsCount}
+        handleWeight={handleWeight}
         weight={weight}
       />
       <Middle
-        setSelected={setSelected}
-        setSelectedSecondary={setSelectedSecondary}
-        selected={selected}
-        selectedSecondary={selectedSecondary}
-        handleOnSelection={handleOnSelection}
-        handleOnSelectionSecondary={handleOnSelectionSecondary}
+        setSelected={setSelectedPaperTyped}
+        setSelectedPaperSize={setSelectedPaperSize}
+        selectedPaperType={selectedPaperType}
+        selectedPaperSize={selectedPaperSize}
+        handleOnSelectedPaperType={handleOnSelectedPaperType}
+        handleOnSelectionPaperSize={handleOnSelectionPaperSize}
       />
       <Bottom
-        handleOnChangeLength={handleOnChangeLength}
-        handleOnChangeWidth={handleOnChangeWidth}
-        handleOnChangeGram={handleOnChangeGram}
+        onSliderPressLength={handleOnLengthChanged}
+        onSliderPressWidth={handleOnWidthChanged}
+        onSliderPressGrammage={handleOnGrammmageChanged}
         length={length}
         width={width}
-        gram={gram}
+        grammage={grammage}
       />
     </View>
   );
@@ -108,24 +98,7 @@ const Stack = createStackNavigator();
 // https://stackoverflow.com/questions/66967903/undefined-is-not-an-object-evaluating-route-key-react-navigation
 function App() {
   let [fontsLoaded, error] = useFonts({
-    Montserrat_100Thin,
-    Montserrat_100Thin_Italic,
-    Montserrat_200ExtraLight,
-    Montserrat_200ExtraLight_Italic,
-    Montserrat_300Light,
-    Montserrat_300Light_Italic,
-    Montserrat_400Regular,
-    Montserrat_400Regular_Italic,
-    Montserrat_500Medium,
-    Montserrat_500Medium_Italic,
-    Montserrat_600SemiBold,
-    Montserrat_600SemiBold_Italic,
-    Montserrat_700Bold,
-    Montserrat_700Bold_Italic,
-    Montserrat_800ExtraBold,
-    Montserrat_800ExtraBold_Italic,
-    Montserrat_900Black,
-    Montserrat_900Black_Italic,
+    Montserrat_400Regular: require("./assets/fonts/Montserrat-Regular.ttf"),
   });
 
   if (!fontsLoaded) {

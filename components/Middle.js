@@ -1,19 +1,23 @@
-import React, { useState, useContext } from "react";
+import React from "react";
 import { View, StyleSheet, Text, FlatList, Pressable } from "react-native";
 
 import Card from "./Card";
-import Colors from "../constants/colors";
-import Size from "../constants/size";
+import CORE_COLORS from "../constants/CORE_COLORS";
+import PaperSizes from "../constants/paperSize";
 
 const Middle = (props) => {
-
-  const {selected, selectedSecondary, handleOnSelection, handleOnSelectionSecondary} = props
+  const {
+    selectedPaperType,
+    selectedPaperSize,
+    handleOnSelectedPaperType,
+    handleOnSelectionPaperSize,
+  } = props;
   const Item = ({ title }) => (
     <View style={styles.item}>
       <Text
-        onPress={() => handleOnSelectionSecondary(title)}
+        onPress={() => handleOnSelectionPaperSize(title)}
         style={{
-          color: selectedSecondary == title ? "#95d4e7" : Colors.black,
+          color: selectedPaperSize == title ? "#95d4e7" : CORE_COLORS.black,
         }}
       >
         {title}
@@ -56,13 +60,13 @@ const Middle = (props) => {
           {buttons.map((button) => {
             return (
               <Pressable
-                onPress={() => handleOnSelection(button)}
+                onPress={() => handleOnSelectedPaperType(button)}
                 style={({ pressed }) => [
                   {
                     backgroundColor:
-                      selected == button.name
-                        ? Colors.middleButtonClick
-                        : Colors.white,
+                      selectedPaperType == button.name
+                        ? CORE_COLORS.middleButtonClick
+                        : CORE_COLORS.white,
                   },
                   styles.border,
                 ]}
@@ -70,7 +74,9 @@ const Middle = (props) => {
                 <Text
                   style={{
                     color:
-                      selected == button.name ? Colors.white : Colors.black,
+                      selectedPaperType == button.name
+                        ? CORE_COLORS.white
+                        : CORE_COLORS.black,
                     fontFamily: "Montserrat_400Regular",
                     fontWeight: "bold",
                   }}
@@ -84,7 +90,7 @@ const Middle = (props) => {
       </Card>
       <Card style={styles.cardContainer}>
         <FlatList
-          data={Object.keys(Size[selected.replace(/\s/g, "")])}
+          data={Object.keys(PaperSizes[selectedPaperType.replace(/\s/g, "")])}
           renderItem={renderItem}
           keyExtractor={(item) => item.id}
           horizontal={true}
@@ -101,7 +107,7 @@ const styles = StyleSheet.create({
     marginTop: 5,
     height: 125,
     paddingVertical: 0,
-    backgroundColor: Colors.middleContainer,
+    backgroundColor: CORE_COLORS.middleContainer,
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
   },
@@ -115,7 +121,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     borderBottomLeftRadius: 10,
     borderBottomRightRadius: 10,
-    backgroundColor: Colors.middleCardContainer,
+    backgroundColor: CORE_COLORS.middleCardContainer,
   },
   container: {
     flex: 1,
@@ -139,7 +145,7 @@ const styles = StyleSheet.create({
   },
   itemButton: {
     width: "100%",
-    Color: Colors.white,
+    Color: CORE_COLORS.white,
   },
 });
 

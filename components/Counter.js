@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import ArithmeticIcon from "./ArithmeticIcon";
-import Colors from "../constants/colors";
+import CORE_COLORS from "../constants/CORE_COLORS";
 import Input from "./Input";
 
 const Counter = (props) => {
@@ -68,8 +68,8 @@ const styles = StyleSheet.create({
     padding: 15,
     height: "60%",
     borderWidth: StyleSheet.hairlineWidth,
-    borderColor: Colors.cardBorderColor,
-    backgroundColor: Colors.cardBackgroundColor,
+    borderColor: CORE_COLORS.cardBorderColor,
+    backgroundColor: CORE_COLORS.cardBackgroundColor,
     justifyContent: "space-around",
     alignItems: "center",
     borderRadius: 15,

@@ -1,35 +1,64 @@
-import React, { useState, useContext } from "react";
-import { SafeAreaView, StyleSheet, Text, View } from "react-native";
-import Slider from "@react-native-community/slider";
+import React from "react";
+import { StyleSheet } from "react-native";
 import Card from "./Card";
 import SliderContainer from "./SliderContainer";
 
-import Colors from "../constants/colors";
+import CORE_COLORS from "../constants/CORE_COLORS";
 
 const Bottom = (props) => {
-  const {handleOnChangeLength, handleOnChangeWidth, handleOnChangeGram, length, width, gram} = props
+  const {
+    onSliderPressLength,
+    onSliderPressWidth,
+    onSliderPressGrammage,
+    length,
+    width,
+    grammage,
+  } = props;
+  const sliderContainerProps = [
+    {
+      onSliderPress: { onSliderPressLength },
+      value: { length },
+      text: "Length",
+      unit: "mm",
+      maxValue: "515",
+    },
+    {
+      onSliderPress: { onSliderPressWidth },
+      value: { width },
+      text: "Width",
+      unit: "mm",
+      maxValue: "728",
+    },
+    {
+      onSliderPress: { onSliderPressGrammage },
+      value: { grammage },
+      text: "Grammage",
+      unit: "g",
+      maxValue: "30",
+    },
+  ];
   return (
     <Card style={styles.cardContainer}>
       <SliderContainer
-        handleOnChangeLength={handleOnChangeLength}
+        onSliderPress={onSliderPressLength}
         value={length}
         text="Length"
         unit="mm"
-        maxValue= "515"
+        maxValue="515"
       />
       <SliderContainer
-        handleOnChangeLength={handleOnChangeWidth}
+        onSliderPress={onSliderPressWidth}
         value={width}
         text="Width"
         unit="mm"
-        maxValue= "728"
+        maxValue="728"
       />
       <SliderContainer
-        handleOnChangeLength={handleOnChangeGram}
-        value={gram}
+        onSliderPress={onSliderPressGrammage}
+        value={grammage}
         text="Grammage"
         unit="g"
-        maxValue= "30"
+        maxValue="30"
       />
     </Card>
   );
@@ -41,7 +70,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   textColor: {
-    color: Colors.white,
+    color: CORE_COLORS.white,
     fontFamily: "Montserrat_400Regular",
     fontWeight: "bold",
   },
@@ -49,12 +78,12 @@ const styles = StyleSheet.create({
     margin: 10,
     width: 400,
     borderRadius: 10,
-    backgroundColor: Colors.bottomCardContainer,
+    backgroundColor: CORE_COLORS.bottomCardContainer,
   },
   slider: {
     width: "100%",
     height: 40,
-    backgroundColor: Colors.sliderBackgroundColor,
+    backgroundColor: CORE_COLORS.sliderBackgroundColor,
   },
 });
 
