@@ -5,7 +5,7 @@ import SliderContainer from "./SliderContainer";
 
 import CORE_COLORS from "../constants/CORE_COLORS";
 
-const Bottom = (props) => {
+const Bottom = (props: { onSliderPressLength: any; onSliderPressWidth: any; onSliderPressGrammage: any; length: any; width: any; grammage: any; }) => {
   const {
     onSliderPressLength,
     onSliderPressWidth,

@@ -5,14 +5,14 @@ import Card from "./Card";
 import CORE_COLORS from "../constants/CORE_COLORS";
 import PaperSizes from "../constants/paperSize";
 
-const Middle = (props) => {
+const Middle = (props: { selectedPaperType: any; selectedPaperSize: any; handleOnSelectedPaperType: any; handleOnSelectionPaperSize: any; }) => {
   const {
     selectedPaperType,
     selectedPaperSize,
     handleOnSelectedPaperType,
     handleOnSelectionPaperSize,
   } = props;
-  const Item = ({ title }) => (
+  const Item = (title:any) => (
     <View style={styles.item}>
       <Text
         onPress={() => handleOnSelectionPaperSize(title)}
@@ -51,7 +51,7 @@ const Middle = (props) => {
       name: "JIS B",
     },
   ];
-  const renderItem = ({ item }) => <Item title={item} />;
+  const renderItem = (item:any) => <Item title={item} />;
 
   return (
     <View>
@@ -92,7 +92,7 @@ const Middle = (props) => {
         <FlatList
           data={Object.keys(PaperSizes[selectedPaperType.replace(/\s/g, "")])}
           renderItem={renderItem}
-          keyExtractor={(item) => item.id}
+          keyExtractor={(item:any) => item.id}
           horizontal={true}
         />
       </Card>

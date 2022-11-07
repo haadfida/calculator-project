@@ -4,23 +4,22 @@ import ArithmeticIcon from "./ArithmeticIcon";
 import CORE_COLORS from "../constants/CORE_COLORS";
 import Input from "./Input";
 
-const Counter = (props) => {
+const Counter = (props: { configureCounter: (arg0: number) => any; }) => {
   const [timesPressed, setTimesPressed] = useState(0);
 
-  const handleOnPressMinus = (current) => {
+  const handleOnPressMinus = () => {
     if (timesPressed > 0) {
       setTimesPressed((current) => current - 1);
     }
   };
 
-  const handleOnPressAdd = (current) => {
+  const handleOnPressAdd = () => {
     setTimesPressed((current) => current + 1);
   };
 
   return (
     <View style={styles.container}>
       <ArithmeticIcon
-        setTimesPressed={setTimesPressed}
         handleOnPressArithmeticIcon={handleOnPressAdd}
         iconType="add"
       />
@@ -33,7 +32,6 @@ const Counter = (props) => {
         </Text>
       </View>
       <ArithmeticIcon
-        setTimesPressed={setTimesPressed}
         handleOnPressArithmeticIcon={handleOnPressMinus}
         iconType="minus"
       />

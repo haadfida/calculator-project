@@ -13,11 +13,11 @@ import PaperSizes from "./constants/paperSize";
 import { Colors } from "react-native/Libraries/NewAppScreen";
 
 function HomeScreen() {
-  const [length, setLength] = useState(0);
-  const [width, setWidth] = useState(0);
-  const [grammage, setGrammage] = useState(0);
-  const [currentSheetsCount, setCurrentSheetsCount] = useState(0);
-  const [weight, setWeight] = useState(0);
+  const [length, setLength] = useState<number>(0);
+  const [width, setWidth] = useState<number>(0);
+  const [grammage, setGrammage] = useState<number>(0);
+  const [currentSheetsCount, setCurrentSheetsCount] = useState<number>(0);
+  const [weight, setWeight] = useState<number>(0);
 
   const [selectedPaperType, setSelectedPaperTyped] = useState("DIN A");
   const [selectedPaperSize, setSelectedPaperSize] = useState("");
@@ -26,19 +26,21 @@ function HomeScreen() {
     handleWeight();
   });
 
-  const handleOnSelectedPaperType = (button) => {
+  const handleOnSelectedPaperType = (button: {name: string}) => {
     setSelectedPaperTyped(button.name);
-    setSelectedPaperSize(false);
+    setSelectedPaperSize("");
   };
 
   const handleWeight = () => {
     setWeight(length * width * 0.01 * 0.01 * grammage * currentSheetsCount);
   };
-  let papersizelist = PaperSizes[selectedPaperType.replace(/\s/g, "")];
+  const papersizelist = PaperSizes[selectedPaperType.replace(/\s/g, "")];
   // console.log(papersizelist);
-  const handleOnSelectionPaperSize = (title) => {
+  // check return type
+  // index
+  const handleOnSelectionPaperSize = (title: string) => {
     setSelectedPaperSize(title);
-    if ([selectedPaperSize] in papersizelist) {
+    if (String([selectedPaperSize]) in papersizelist) {
       setLength(
         papersizelist[selectedPaperSize]["length"]
       );
@@ -48,21 +50,19 @@ function HomeScreen() {
       setGrammage(
         papersizelist[selectedPaperSize]["gram"]
       );
-      setWeight(
-        parseInt(length * width * 0.01 * 0.01 * grammage * currentSheetsCount)
-      );
+      setWeight(length * width * 0.01 * 0.01 * grammage * currentSheetsCount);
     }
   };
 
-  const handleOnLengthChanged = (val) => {
+  const handleOnLengthChanged = (val: number) => {
     setLength(val);
   };
 
-  const handleOnWidthChanged = (val) => {
+  const handleOnWidthChanged = (val: number) => {
     setWidth(val);
   };
 
-  const handleOnGrammmageChanged = (val) => {
+  const handleOnGrammmageChanged = (val: number) => {
     setGrammage(val);
   };
 

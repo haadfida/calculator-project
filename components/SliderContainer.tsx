@@ -4,7 +4,7 @@ import Slider from "@react-native-community/slider";
 
 import CORE_COLORS from "../constants/CORE_COLORS";
 
-const SliderContainer = (props) => {
+const SliderContainer = (props: { text: any; value: any; unit: any; maxValue: any; onSliderPress: any; }) => {
   const { text, value, unit, maxValue, onSliderPress } = props;
 
   return (
@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     margin: 10,
     width: 400,
     borderRadius: 10,
-    backgroundColor: CORE_COLORS.SliderContainerCardContainer,
+    // backgroundColor: CORE_COLORS.SliderContainerCardContainer,
   },
   slider: {
     width: "100%",
