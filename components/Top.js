@@ -1,4 +1,4 @@
-import React, { useState, createContext  } from "react";
+import React, { useState, createContext } from "react";
 import { View, Text, StyleSheet, Image } from "react-native";
 import { Values } from "./Middle";
 
@@ -8,8 +8,7 @@ import Counter from "./Counter";
 import Imports from "../constants/imports";
 
 const Top = (props) => {
-  const [currentCount, setCurrentCount] = useState(0);
-
+  const { currentCount, setCurrentCount, weight } = props;
   const renderPaperContent = (props) => {
     if (currentCount <= 1 || currentCount < 5) {
       sourcePaperContent = Imports.lessThanFive;
@@ -44,7 +43,7 @@ const Top = (props) => {
       </Card>
       <Card style={styles.cardContainer}>
         <Text style={{ ...styles.textSizePrimary, ...styles.textColor }}>
-          4.99g
+          {weight}g
         </Text>
         <Text style={{ ...styles.textSizeSecondary, ...styles.textColor }}>
           Per copy
@@ -81,14 +80,13 @@ const styles = StyleSheet.create({
   },
   textSizePrimary: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     fontFamily: "Montserrat_400Regular",
   },
   textSizeSecondary: {
     fontSize: 12,
     fontFamily: "Montserrat_400Regular",
-    fontWeight: 'bold',
-
+    fontWeight: "bold",
   },
   textColor: {
     color: "white",

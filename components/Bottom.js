@@ -7,22 +7,7 @@ import SliderContainer from "./SliderContainer";
 import Colors from "../constants/colors";
 
 const Bottom = (props) => {
-  const [length, setLength] = useState(0);
-  const [width, setWidth] = useState(0);
-  const [gram, setGram] = useState(0);
-  
-  const handleOnChangeLength = (val) => {
-    setLength(val);
-  };
-
-  const handleOnChangeWidth = (val) => {
-    setWidth(val);
-  };
-
-  const handleOnChangeGram = (val) => {
-    setGram(val);
-  };
-
+  const {handleOnChangeLength, handleOnChangeWidth, handleOnChangeGram, length, width, gram} = props
   return (
     <Card style={styles.cardContainer}>
       <SliderContainer
@@ -30,21 +15,21 @@ const Bottom = (props) => {
         value={length}
         text="Length"
         unit="mm"
-        maxValue= "350"
+        maxValue= "515"
       />
       <SliderContainer
         handleOnChangeLength={handleOnChangeWidth}
         value={width}
         text="Width"
         unit="mm"
-        maxValue= "350"
+        maxValue= "728"
       />
       <SliderContainer
         handleOnChangeLength={handleOnChangeGram}
         value={gram}
         text="Grammage"
         unit="g"
-        maxValue= "1000"
+        maxValue= "30"
       />
     </Card>
   );

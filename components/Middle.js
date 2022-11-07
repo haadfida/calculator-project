@@ -4,16 +4,10 @@ import { View, StyleSheet, Text, FlatList, Pressable } from "react-native";
 import Card from "./Card";
 import Colors from "../constants/colors";
 import Size from "../constants/size";
-import { Values } from "./Top";
 
 const Middle = (props) => {
 
-  const [selected, setSelected] = useState("DIN A");
-  const [selectedSecondary, setSelectedSecondary] = useState(false);
-
-  const handleOnSelectionSecondary = (title) => {
-    setSelectedSecondary(title);
-  };
+  const {selected, selectedSecondary, handleOnSelection, handleOnSelectionSecondary} = props
   const Item = ({ title }) => (
     <View style={styles.item}>
       <Text
@@ -54,9 +48,7 @@ const Middle = (props) => {
     },
   ];
   const renderItem = ({ item }) => <Item title={item} />;
-  const handleOnSelection = (button) => {
-    setSelected(button.name);
-  };
+
   return (
     <View>
       <Card style={styles.middleContainer}>

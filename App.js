@@ -1,6 +1,6 @@
 // In App.js in a new project
 
-import React, { createContext } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet, Image, Button, Pressable } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -8,9 +8,7 @@ import Top from "./components/Top";
 import Middle from "./components/Middle";
 import Bottom from "./components/Bottom";
 import { useFonts } from "expo-font";
-
-export const Values = createContext();
-
+import Size from "./constants/size";
 import {
   Montserrat_100Thin,
   Montserrat_100Thin_Italic,
@@ -34,16 +32,75 @@ import {
 import { Colors } from "react-native/Libraries/NewAppScreen";
 
 function HomeScreen() {
+  const [length, setLength] = useState(0);
+  const [width, setWidth] = useState(0);
+  const [gram, setGram] = useState(0);
+  const [currentCount, setCurrentCount] = useState(0);
+  const [weight, setWeight] = useState(0);
+
+  const [selected, setSelected] = useState("DIN A");
+  const [selectedSecondary, setSelectedSecondary] = useState(false);
+
+  const handleOnSelection = (button) => {
+    setSelected(button.name);
+    setSelectedSecondary(false);
+  };
+
+  const weightHandler = () => {
+    setWeight(length * width * 0.01 * 0.01 * gram * currentCount);
+  };
+
+  const handleOnSelectionSecondary = (title) => {
+    setSelectedSecondary(title);
+    if ([selectedSecondary] in Size[selected.replace(/\s/g, "")]) {
+      setLength(Size[selected.replace(/\s/g, "")][selectedSecondary]["length"]);
+      setWidth(Size[selected.replace(/\s/g, "")][selectedSecondary]["width"]);
+      setGram(Size[selected.replace(/\s/g, "")][selectedSecondary]["gram"]);
+      setWeight(parseInt(length * width * 0.01 * 0.01 * gram * currentCount));
+    }
+  };
+
+  const handleOnChangeLength = (val) => {
+    setLength(val);
+  };
+
+  const handleOnChangeWidth = (val) => {
+    setWidth(val);
+  };
+
+  const handleOnChangeGram = (val) => {
+    setGram(val);
+  };
+
+  useEffect(() => {
+    setWeight(parseInt(length * width * 0.01 * 0.01 * gram * currentCount));
+  });
+
   return (
-    <>
-      <Values.Provider value={"Archna"}>
-        <View style={styles.screen}>
-          <Top />
-          <Middle />
-          <Bottom />
-        </View>
-      </Values.Provider>
-    </>
+    <View style={styles.screen}>
+      <Top
+        currentCount={currentCount}
+        setCurrentCount={setCurrentCount}
+        weightHandler={weightHandler}
+        weight={weight}
+      />
+      <Middle
+        setSelected={setSelected}
+        setSelectedSecondary={setSelectedSecondary}
+        selected={selected}
+        selectedSecondary={selectedSecondary}
+        handleOnSelection={handleOnSelection}
+        handleOnSelectionSecondary={handleOnSelectionSecondary}
+      />
+      <Bottom
+        handleOnChangeLength={handleOnChangeLength}
+        handleOnChangeWidth={handleOnChangeWidth}
+        handleOnChangeGram={handleOnChangeGram}
+        length={length}
+        width={width}
+        gram={gram}
+      />
+    </View>
   );
 }
 
