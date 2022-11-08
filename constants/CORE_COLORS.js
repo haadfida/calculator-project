@@ -7,6 +7,10 @@ export default {
   topBackgroundColor: "#6acafb",
   cardTopContainer: "#8bd9fb",
   middleButtonClick: "#b1b3c9",
-  middleContainer:  "#f6f5f8",
+  middleContainer: "#f6f5f8",
   middleCardContainer: "#eff0f5",
+  sliderBackgroundColor: "#3c4160",
+  bottomCardContainer: "#3c4160",
+  bottomSliderText: "#4c5171",
+  sliderTintColor: "#69cbfa",
 };

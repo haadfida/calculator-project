@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import ArithmeticIcon from "./ArithmeticIcon";
-import Colors from "../constants/colors";
+import CORE_COLORS from "../constants/CORE_COLORS";
 import Input from "./Input";
 
 const Counter = (props) => {
@@ -10,6 +10,13 @@ const Counter = (props) => {
   const handleOnPressMinus = (current) => {
     if (timesPressed > 0) {
       setTimesPressed((current) => current - 1);
+    }
+  };
+
+  const handleOnEnterText = (value) => {
+    let setValue = parseInt(value);
+    if (setValue > 0) {
+      setTimesPressed(setValue);
     }
   };
 
@@ -25,7 +32,7 @@ const Counter = (props) => {
         iconType="add"
       />
       <View style={styles.sheetBox}>
-        <Input style={{ ...styles.text, ...styles.textColor }}>
+        <Input onChangeText={handleOnEnterText} style={{ ...styles.text, ...styles.textColor }}>
           {props.configureCounter(timesPressed)}
         </Input>
         <Text style={{ ...styles.textSecondary, ...styles.textColor }}>
@@ -68,8 +75,8 @@ const styles = StyleSheet.create({
     padding: 15,
     height: "60%",
     borderWidth: StyleSheet.hairlineWidth,
-    borderColor: Colors.cardBorderColor,
-    backgroundColor: Colors.cardBackgroundColor,
+    borderColor: CORE_COLORS.cardBorderColor,
+    backgroundColor: CORE_COLORS.cardBackgroundColor,
     justifyContent: "space-around",
     alignItems: "center",
     borderRadius: 15,

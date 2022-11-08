@@ -1,46 +1,23 @@
-import React, { useState } from "react";
+import React from "react";
 import { View, StyleSheet, Text, FlatList, Pressable } from "react-native";
 
 import Card from "./Card";
-import Colors from "../constants/colors";
+import CORE_COLORS from "../constants/CORE_COLORS";
+import PaperSizes from "../constants/paperSize";
 
 const Middle = (props) => {
-  const [selected, setSelected] = useState(false);
-  const [selectedSecondary, setSelectedSecondary] = useState(false);
-
-  const DATA = [
-    {
-      id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
-      title: "A2",
-    },
-    {
-      id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
-      title: "A3",
-    },
-    {
-      id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28b2",
-      title: "A4",
-    },
-    {
-      id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f43",
-      title: "A5",
-    },
-    {
-      id: "3ac68afa-c605-48d3-a4f8-fbd91aa97f43",
-      title: "A6",
-    },
-    {
-      id: "58694a0f-3da2-471f-bd96-145571e29d72",
-      title: "DIN LANG",
-    },
-  ];
-
+  const {
+    selectedPaperType,
+    selectedPaperSize,
+    handleOnSelectedPaperType,
+    handleOnSelectionPaperSize,
+  } = props;
   const Item = ({ title }) => (
     <View style={styles.item}>
       <Text
-        onPress={() => setSelectedSecondary(title)}
+        onPress={() => handleOnSelectionPaperSize(title)}
         style={{
-          color: selectedSecondary == title ? "#95d4e7" : Colors.black,
+          color: selectedPaperSize == title ? "#95d4e7" : CORE_COLORS.black,
         }}
       >
         {title}
@@ -74,7 +51,7 @@ const Middle = (props) => {
       name: "JIS B",
     },
   ];
-  const renderItem = ({ item }) => <Item title={item.title} />;
+  const renderItem = ({ item }) => <Item title={item} />;
 
   return (
     <View>
@@ -83,13 +60,13 @@ const Middle = (props) => {
           {buttons.map((button) => {
             return (
               <Pressable
-                onPress={() => setSelected(button.name)}
+                onPress={() => handleOnSelectedPaperType(button)}
                 style={({ pressed }) => [
                   {
                     backgroundColor:
-                      selected == button.name
-                        ? Colors.middleButtonClick
-                        : Colors.white,
+                      selectedPaperType == button.name
+                        ? CORE_COLORS.middleButtonClick
+                        : CORE_COLORS.white,
                   },
                   styles.border,
                 ]}
@@ -97,7 +74,9 @@ const Middle = (props) => {
                 <Text
                   style={{
                     color:
-                      selected == button.name ? Colors.white : Colors.black,
+                      selectedPaperType == button.name
+                        ? CORE_COLORS.white
+                        : CORE_COLORS.black,
                     fontFamily: "Montserrat_400Regular",
                     fontWeight: "bold",
                   }}
@@ -111,7 +90,7 @@ const Middle = (props) => {
       </Card>
       <Card style={styles.cardContainer}>
         <FlatList
-          data={DATA}
+          data={Object.keys(PaperSizes[selectedPaperType.replace(/\s/g, "")])}
           renderItem={renderItem}
           keyExtractor={(item) => item.id}
           horizontal={true}
@@ -126,9 +105,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     marginTop: 5,
-    height: "40%",
-    paddingVertical: 10,
-    backgroundColor: Colors.middleContainer,
+    height: 125,
+    paddingVertical: 0,
+    backgroundColor: CORE_COLORS.middleContainer,
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
   },
@@ -138,11 +117,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     width: 400,
-    height: "15%",
+    height: 50,
     paddingVertical: 10,
     borderBottomLeftRadius: 10,
     borderBottomRightRadius: 10,
-    backgroundColor: Colors.middleCardContainer,
+    backgroundColor: CORE_COLORS.middleCardContainer,
   },
   container: {
     flex: 1,
@@ -166,7 +145,7 @@ const styles = StyleSheet.create({
   },
   itemButton: {
     width: "100%",
-    Color: Colors.white,
+    Color: CORE_COLORS.white,
   },
 });
 

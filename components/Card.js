@@ -1,6 +1,6 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
-import Colors from "../constants/colors";
+import CORE_COLORS from "../constants/CORE_COLORS";
 
 const Card = (props) => {
   const { style, children } = props;
@@ -11,7 +11,7 @@ const Card = (props) => {
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: Colors.white,
+    backgroundColor: CORE_COLORS.white,
     padding: 20,
   },
 });

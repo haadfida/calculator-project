@@ -9,7 +9,10 @@ const styles = StyleSheet.create({
   input: {
     height: 30,
     marginVertical: 10,
-    fontFamily: 'Montserrat_400Regular'
+    fontFamily: 'Montserrat_400Regular',
+    keyboardType: "number-pad",
+    maxLength: 2,
+
   },
 });
 
