@@ -18,52 +18,62 @@ function HomeScreen() {
   const [grammage, setGrammage] = useState<number>(0);
   const [currentSheetsCount, setCurrentSheetsCount] = useState<number>(0);
   const [weight, setWeight] = useState<number>(0);
+  const [isCustom, setIsCustom] = useState<boolean>(false);
 
-  const [selectedPaperType, setSelectedPaperTyped] = useState("DIN A");
-  const [selectedPaperSize, setSelectedPaperSize] = useState("");
+
+  const [selectedPaperType, setSelectedPaperTyped] = useState<string>("CUSTOM");
+  const [selectedPaperSize, setSelectedPaperSize] = useState<string>("");
 
   useEffect(() => {
     handleWeight();
   });
 
-  const handleOnSelectedPaperType = (button: {name: string}) => {
+  const handleOnSelectedPaperType = (button: { name: string }) => {
     setSelectedPaperTyped(button.name);
     setSelectedPaperSize("");
+    setIsCustom(false);
   };
 
   const handleWeight = () => {
-    setWeight(length * width * 0.01 * 0.01 * grammage * currentSheetsCount);
+    setWeight(
+      Math.floor(
+        Number(length * width * 0.01 * 0.01 * grammage * currentSheetsCount)
+      )
+    );
   };
+  interface PaperSize {
+    key: number;
+    values: string[];
+  }
   const papersizelist = PaperSizes[selectedPaperType.replace(/\s/g, "")];
   // console.log(papersizelist);
-  // check return type
-  // index
   const handleOnSelectionPaperSize = (title: string) => {
     setSelectedPaperSize(title);
+    setIsCustom(false);
     if (String([selectedPaperSize]) in papersizelist) {
-      setLength(
-        papersizelist[selectedPaperSize]["length"]
-      );
-      setWidth(
-        papersizelist[selectedPaperSize]["width"]
-      );
-      setGrammage(
-        papersizelist[selectedPaperSize]["gram"]
-      );
+      setLength(papersizelist[selectedPaperSize]["length"]);
+      setWidth(papersizelist[selectedPaperSize]["width"]);
+      setGrammage(papersizelist[selectedPaperSize]["gram"]);
       setWeight(length * width * 0.01 * 0.01 * grammage * currentSheetsCount);
     }
   };
 
   const handleOnLengthChanged = (val: number) => {
     setLength(val);
+    setIsCustom(true);
+    setSelectedPaperTyped("CUSTOM");
   };
 
   const handleOnWidthChanged = (val: number) => {
     setWidth(val);
+    setIsCustom(true);
+    setSelectedPaperTyped("CUSTOM");
   };
 
   const handleOnGrammmageChanged = (val: number) => {
     setGrammage(val);
+    setIsCustom(true);
+    setSelectedPaperTyped("CUSTOM");
   };
 
   return (
@@ -75,12 +85,11 @@ function HomeScreen() {
         weight={weight}
       />
       <Middle
-        setSelected={setSelectedPaperTyped}
-        setSelectedPaperSize={setSelectedPaperSize}
         selectedPaperType={selectedPaperType}
         selectedPaperSize={selectedPaperSize}
         handleOnSelectedPaperType={handleOnSelectedPaperType}
         handleOnSelectionPaperSize={handleOnSelectionPaperSize}
+        isCustom={isCustom}
       />
       <Bottom
         onSliderPressLength={handleOnLengthChanged}

@@ -41,4 +41,5 @@ export default {
     B5: { length: 182, width: 257, gram: 3.74 },
     B6: { length: 128, width: 182, gram: 1.86 },
   },
+  CUSTOM: {}
 };

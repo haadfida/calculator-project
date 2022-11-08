@@ -68,24 +68,24 @@ const styles = StyleSheet.create({
     borderTopRightRadius: CORE_THEME.TopContainerMarginTopBorderTopRightRadius,
   },
   cardContainer: {
-    margintop: -16,
+    margintop: CORE_THEME.TopCardContainerMarginTop,
     flexDirection: "row",
     alignItems: "center",
-    paddingVertical: 10,
+    paddingVertical: CORE_THEME.TopCardContainerPaddingVertical,
     justifyContent: "space-between",
-    width: 400,
-    height: 60,
-    borderBottomLeftRadius: 10, //replace
-    borderBottomRightRadius: 10, //replace
+    width: CORE_THEME.TopCardContainerWidth,
+    height: CORE_THEME.TopCardContainerHeight,
+    borderBottomLeftRadius: CORE_THEME.TopContainerMarginTopBorderTopLeftRadius,
+    borderBottomRightRadius: CORE_THEME.TopContainerMarginTopBorderTopRightRadius,
     backgroundColor: CORE_COLORS.cardTopContainer,
   },
   textSizePrimary: {
-    fontSize: 18,
+    fontSize: CORE_THEME.TopTextSizePrimary,
     fontWeight: "bold",
     fontFamily: "Montserrat_400Regular",
   },
   textSizeSecondary: {
-    fontSize: 12,
+    fontSize: CORE_THEME.TopTextSizeSeconary,
     fontFamily: "Montserrat_400Regular",
     fontWeight: "bold",
   },

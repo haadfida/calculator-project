@@ -3,8 +3,10 @@ import { StyleSheet, Text, View } from "react-native";
 import Slider from "@react-native-community/slider";
 
 import CORE_COLORS from "../constants/CORE_COLORS";
+import CORE_THEME from "../constants/CORE_THEME";
 
-const SliderContainer = (props: { text: any; value: any; unit: any; maxValue: any; onSliderPress: any; }) => {
+
+const SliderContainer = (props: { text: string; value: number; unit: string; maxValue: string; onSliderPress: any; }) => {
   const { text, value, unit, maxValue, onSliderPress } = props;
 
   return (
@@ -22,7 +24,7 @@ const SliderContainer = (props: { text: any; value: any; unit: any; maxValue: an
         value={value}
         minimumValue={0}
         step={1}
-        maximumValue={maxValue}
+        maximumValue={Number(maxValue)}
         minimumTrackTintColor={CORE_COLORS.sliderTintColor}
         maximumTrackTintColor={CORE_COLORS.sliderTintColor}
         thumbTintColor={CORE_COLORS.sliderTintColor}
@@ -36,7 +38,7 @@ const styles = StyleSheet.create({
   headers: {
     flexDirection: "row",
     justifyContent: "space-between",
-    margin: 10,
+    margin: CORE_THEME.margin,
   },
   textColor: {
     color: CORE_COLORS.white,
@@ -45,19 +47,18 @@ const styles = StyleSheet.create({
   },
   border: {
     alignItems: "center",
-    borderRadius: 15,
-    padding: 10,
+    borderRadius: CORE_THEME.SliderContainerBorderRadius,
+    padding: CORE_THEME.padding,
     backgroundColor: CORE_COLORS.bottomSliderText,
   },
   cardContainer: {
-    margin: 10,
-    width: 400,
-    borderRadius: 10,
-    // backgroundColor: CORE_COLORS.SliderContainerCardContainer,
+    margin: CORE_THEME.margin,
+    width: CORE_THEME.SliderContainerWidth,
+    borderRadius: CORE_THEME.borderRadius,
   },
   slider: {
     width: "100%",
-    height: 40,
+    height: CORE_THEME.SliderContainerSliderHeight,
     backgroundColor: CORE_COLORS.sliderBackgroundColor,
   },
 });
