@@ -13,6 +13,13 @@ const Counter = (props) => {
     }
   };
 
+  const handleOnEnterText = (value) => {
+    let setValue = parseInt(value);
+    if (setValue > 0) {
+      setTimesPressed(setValue);
+    }
+  };
+
   const handleOnPressAdd = (current) => {
     setTimesPressed((current) => current + 1);
   };
@@ -25,7 +32,7 @@ const Counter = (props) => {
         iconType="add"
       />
       <View style={styles.sheetBox}>
-        <Input style={{ ...styles.text, ...styles.textColor }}>
+        <Input onChangeText={handleOnEnterText} style={{ ...styles.text, ...styles.textColor }}>
           {props.configureCounter(timesPressed)}
         </Input>
         <Text style={{ ...styles.textSecondary, ...styles.textColor }}>

@@ -32,7 +32,7 @@ function HomeScreen() {
   };
 
   const handleWeight = () => {
-    setWeight(length * width * 0.01 * 0.01 * grammage * currentSheetsCount);
+    setWeight(parseInt(length * width * 0.01 * 0.01 * grammage * currentSheetsCount));
   };
   let papersizelist = PaperSizes[selectedPaperType.replace(/\s/g, "")];
   // console.log(papersizelist);
