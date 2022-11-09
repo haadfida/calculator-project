@@ -2,37 +2,42 @@ import React, { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import ArithmeticIcon from "./ArithmeticIcon";
 import CORE_COLORS from "../constants/CORE_COLORS";
+import CORE_THEME from "../constants/CORE_THEME";
 import Input from "./Input";
 
-const Counter = (props) => {
+const Counter = (props: { configureCounter: (arg0: number) => any }) => {
   const [timesPressed, setTimesPressed] = useState(0);
 
-  const handleOnPressMinus = (current) => {
+  const handleOnPressMinus = () => {
     if (timesPressed > 0) {
       setTimesPressed((current) => current - 1);
     }
   };
 
-  const handleOnEnterText = (value) => {
+  const handleOnPressAdd = () => {
+    setTimesPressed((current) => current + 1);
+  };
+
+  const handleOnEnterText = (value: string) => {
     let setValue = parseInt(value);
     if (setValue > 0) {
       setTimesPressed(setValue);
     }
   };
 
-  const handleOnPressAdd = (current) => {
-    setTimesPressed((current) => current + 1);
-  };
-
   return (
     <View style={styles.container}>
       <ArithmeticIcon
-        setTimesPressed={setTimesPressed}
         handleOnPressArithmeticIcon={handleOnPressAdd}
         iconType="add"
+        style={styles.plus}
+
       />
       <View style={styles.sheetBox}>
-        <Input onChangeText={handleOnEnterText} style={{ ...styles.text, ...styles.textColor }}>
+        <Input
+          onChangeText={handleOnEnterText}
+          style={{ ...styles.text, ...styles.textColor }}
+        >
           {props.configureCounter(timesPressed)}
         </Input>
         <Text style={{ ...styles.textSecondary, ...styles.textColor }}>
@@ -40,9 +45,9 @@ const Counter = (props) => {
         </Text>
       </View>
       <ArithmeticIcon
-        setTimesPressed={setTimesPressed}
         handleOnPressArithmeticIcon={handleOnPressMinus}
         iconType="minus"
+        style={styles.minus}
       />
     </View>
   );
@@ -52,14 +57,14 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: "center",
     alignItems: "center",
-    width: 90,
+    width: CORE_THEME.CounterContainerWidth,
   },
   text: {
-    fontSize: 25,
+    fontSize: CORE_THEME.CounterFontSize,
     keyboardType: "number-pad",
     autoCapitalize: "none",
-    maxLength: 2,
-    paddingLeft: 4,
+    maxLength: CORE_THEME.CounterMaxLength,
+    paddingLeft: CORE_THEME.CounterPaddingLeft,
     fontWeight: "bold",
   },
   textColor: {
@@ -68,21 +73,32 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   textSecondary: {
-    fontSize: 10,
-    paddingBottom: 8,
+    fontSize: CORE_THEME.CounterFontSizeSecondary,
+    paddingBottom: CORE_THEME.CounterTextPaddingBottom,
   },
   sheetBox: {
-    padding: 15,
+    padding: CORE_THEME.CounterSheetBoxPadding,
     height: "60%",
     borderWidth: StyleSheet.hairlineWidth,
     borderColor: CORE_COLORS.cardBorderColor,
     backgroundColor: CORE_COLORS.cardBackgroundColor,
     justifyContent: "space-around",
     alignItems: "center",
-    borderRadius: 15,
-    marginTop: -16,
-    marginBottom: -15,
+    borderRadius: CORE_THEME.CounterSheetBorderRadius,
+    // marginTop: CORE_THEME.marginTop,
+    // marginBottom: CORE_THEME.CounterSheetMarginBottom,
   },
+  minus:{
+    position: "absolute",
+    left: 30,
+    top: 55,
+  },
+  plus:{
+    position: "absolute",
+    left: 30,
+    top: -20,
+  }
+
 });
 
 export default Counter;

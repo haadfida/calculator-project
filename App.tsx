@@ -13,57 +13,67 @@ import PaperSizes from "./constants/paperSize";
 import { Colors } from "react-native/Libraries/NewAppScreen";
 
 function HomeScreen() {
-  const [length, setLength] = useState(0);
-  const [width, setWidth] = useState(0);
-  const [grammage, setGrammage] = useState(0);
-  const [currentSheetsCount, setCurrentSheetsCount] = useState(0);
-  const [weight, setWeight] = useState(0);
+  const [length, setLength] = useState<number>(0);
+  const [width, setWidth] = useState<number>(0);
+  const [grammage, setGrammage] = useState<number>(0);
+  const [currentSheetsCount, setCurrentSheetsCount] = useState<number>(0);
+  const [weight, setWeight] = useState<number>(0);
+  const [isCustom, setIsCustom] = useState<boolean>(false);
 
-  const [selectedPaperType, setSelectedPaperTyped] = useState("DIN A");
-  const [selectedPaperSize, setSelectedPaperSize] = useState("");
+
+  const [selectedPaperType, setSelectedPaperTyped] = useState<string>("CUSTOM");
+  const [selectedPaperSize, setSelectedPaperSize] = useState<string>("");
 
   useEffect(() => {
     handleWeight();
   });
 
-  const handleOnSelectedPaperType = (button) => {
-    setSelectedPaperTyped(button.name);
-    setSelectedPaperSize(false);
+  const handleOnSelectedPaperType = (buttonName: string) => {
+    setSelectedPaperTyped(buttonName);
+    setSelectedPaperSize("");
+    setIsCustom(false);
   };
 
   const handleWeight = () => {
-    setWeight(parseInt(length * width * 0.01 * 0.01 * grammage * currentSheetsCount));
+    setWeight(
+      Math.floor(
+        Number(length * width * 0.01 * 0.01 * grammage * currentSheetsCount)
+      )
+    );
   };
-  let papersizelist = PaperSizes[selectedPaperType.replace(/\s/g, "")];
+  interface PaperSize {
+    key: number;
+    values: string[];
+  }
+  const papersizelist = PaperSizes[selectedPaperType.replace(/\s/g, "")];
   // console.log(papersizelist);
-  const handleOnSelectionPaperSize = (title) => {
+  const handleOnSelectionPaperSize = (title: string) => {
     setSelectedPaperSize(title);
-    if ([selectedPaperSize] in papersizelist) {
-      setLength(
-        papersizelist[selectedPaperSize]["length"]
-      );
-      setWidth(
-        papersizelist[selectedPaperSize]["width"]
-      );
-      setGrammage(
-        papersizelist[selectedPaperSize]["gram"]
-      );
-      setWeight(
-        parseInt(length * width * 0.01 * 0.01 * grammage * currentSheetsCount)
-      );
+    setIsCustom(false);
+    if (String([selectedPaperSize]) in papersizelist) {
+      setLength(papersizelist[selectedPaperSize]["length"]);
+      setWidth(papersizelist[selectedPaperSize]["width"]);
+      setGrammage(papersizelist[selectedPaperSize]["gram"]);
+      setWeight(length * width * 0.01 * 0.01 * grammage * currentSheetsCount);
     }
   };
 
-  const handleOnLengthChanged = (val) => {
+  const handleOnLengthChanged = (val: number) => {
     setLength(val);
+    setIsCustom(true);
+    setSelectedPaperTyped("CUSTOM");
   };
 
-  const handleOnWidthChanged = (val) => {
+  const handleOnWidthChanged = (val: number) => {
     setWidth(val);
+    setIsCustom(true);
+    setSelectedPaperTyped("CUSTOM");
   };
 
-  const handleOnGrammmageChanged = (val) => {
+  const handleOnGrammmageChanged = (val: number) => {
     setGrammage(val);
+    setIsCustom(true);
+    setSelectedPaperTyped("CUSTOM");
   };
 
   return (
@@ -71,16 +81,14 @@ function HomeScreen() {
       <Top
         currentSheetsCount={currentSheetsCount}
         onSheetCountUpdated={setCurrentSheetsCount}
-        handleWeight={handleWeight}
         weight={weight}
       />
       <Middle
-        setSelected={setSelectedPaperTyped}
-        setSelectedPaperSize={setSelectedPaperSize}
         selectedPaperType={selectedPaperType}
         selectedPaperSize={selectedPaperSize}
         handleOnSelectedPaperType={handleOnSelectedPaperType}
         handleOnSelectionPaperSize={handleOnSelectionPaperSize}
+        isCustom={isCustom}
       />
       <Bottom
         onSliderPressLength={handleOnLengthChanged}

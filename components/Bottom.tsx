@@ -4,8 +4,17 @@ import Card from "./Card";
 import SliderContainer from "./SliderContainer";
 
 import CORE_COLORS from "../constants/CORE_COLORS";
+import CORE_THEME from "../constants/CORE_THEME";
 
-const Bottom = (props) => {
+
+const Bottom = (props: {
+  onSliderPressLength: any;
+  onSliderPressWidth: any;
+  onSliderPressGrammage: any;
+  length: any;
+  width: any;
+  grammage: any;
+}) => {
   const {
     onSliderPressLength,
     onSliderPressWidth,
@@ -44,21 +53,21 @@ const Bottom = (props) => {
         value={length}
         text="Length"
         unit="mm"
-        maxValue="515"
+        maxValue={515}
       />
       <SliderContainer
         onSliderPress={onSliderPressWidth}
         value={width}
         text="Width"
         unit="mm"
-        maxValue="728"
+        maxValue={728}
       />
       <SliderContainer
         onSliderPress={onSliderPressGrammage}
         value={grammage}
         text="Grammage"
         unit="g"
-        maxValue="30"
+        maxValue={30}
       />
     </Card>
   );

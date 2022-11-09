@@ -1,18 +1,39 @@
 import React from "react";
-import { View, StyleSheet, Text, FlatList, Pressable } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Text,
+  FlatList,
+  Pressable,
+  ListRenderItem,
+} from "react-native";
 
 import Card from "./Card";
 import CORE_COLORS from "../constants/CORE_COLORS";
 import PaperSizes from "../constants/paperSize";
+import CORE_THEME from "../constants/CORE_THEME";
 
-const Middle = (props) => {
+interface MiddleProps {
+  selectedPaperType: string;
+  selectedPaperSize: string;
+  handleOnSelectedPaperType: (paperType: string) => void;
+  handleOnSelectionPaperSize: (paperSize: string) => void;
+  isCustom: boolean;
+}
+
+const Middle = (props: MiddleProps) => {
   const {
     selectedPaperType,
     selectedPaperSize,
     handleOnSelectedPaperType,
     handleOnSelectionPaperSize,
+    isCustom,
   } = props;
-  const Item = ({ title }) => (
+
+  interface Item {
+    title: string;
+  }
+  const Item = ({ title }: Item) => (
     <View style={styles.item}>
       <Text
         onPress={() => handleOnSelectionPaperSize(title)}
@@ -50,9 +71,16 @@ const Middle = (props) => {
       id: "6",
       name: "JIS B",
     },
+    {
+      id: "7",
+      name: "CUSTOM",
+    },
   ];
-  const renderItem = ({ item }) => <Item title={item} />;
-
+  interface ItemInterface {
+    id:string;
+    item: string;
+  }
+  const renderItem = (item: ListRenderItem<ItemInterface>) => <Item title={item.item} />;
   return (
     <View>
       <Card style={styles.middleContainer}>
@@ -60,11 +88,13 @@ const Middle = (props) => {
           {buttons.map((button) => {
             return (
               <Pressable
-                onPress={() => handleOnSelectedPaperType(button)}
+                onPress={() => handleOnSelectedPaperType(button.name)}
                 style={({ pressed }) => [
                   {
                     backgroundColor:
-                      selectedPaperType == button.name
+                      isCustom && button.name == "CUSTOM"
+                        ? CORE_COLORS.middleButtonClick
+                        : selectedPaperType == button.name
                         ? CORE_COLORS.middleButtonClick
                         : CORE_COLORS.white,
                   },
@@ -74,7 +104,9 @@ const Middle = (props) => {
                 <Text
                   style={{
                     color:
-                      selectedPaperType == button.name
+                      isCustom && button.name == "CUSTOM"
+                        ? CORE_COLORS.white
+                        : selectedPaperType == button.name
                         ? CORE_COLORS.white
                         : CORE_COLORS.black,
                     fontFamily: "Montserrat_400Regular",
@@ -92,7 +124,7 @@ const Middle = (props) => {
         <FlatList
           data={Object.keys(PaperSizes[selectedPaperType.replace(/\s/g, "")])}
           renderItem={renderItem}
-          keyExtractor={(item) => item.id}
+          keyExtractor={(item: any) => item.id}
           horizontal={true}
         />
       </Card>
@@ -104,43 +136,42 @@ const styles = StyleSheet.create({
   middleContainer: {
     alignItems: "center",
     justifyContent: "space-between",
-    marginTop: 5,
-    height: 125,
-    paddingVertical: 0,
+    marginTop: CORE_THEME.MiddleMarginTop,
+    height: CORE_THEME.MiddleMarginHeight,
+    paddingVertical: CORE_THEME.zero,
     backgroundColor: CORE_COLORS.middleContainer,
-    borderTopLeftRadius: 10,
-    borderTopRightRadius: 10,
+    borderTopLeftRadius: CORE_THEME.borderRadius,
+    borderTopRightRadius: CORE_THEME.borderRadius,
   },
   cardContainer: {
-    margintop: -16,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    width: 400,
-    height: 50,
-    paddingVertical: 10,
-    borderBottomLeftRadius: 10,
-    borderBottomRightRadius: 10,
+    width: CORE_THEME.MiddleContainerWidth,
+    height: CORE_THEME.MiddleContainerHeight,
+    paddingVertical: CORE_THEME.MiddleContainerPaddingVertical,
+    borderBottomLeftRadius: CORE_THEME.borderRadius,
+    borderBottomRightRadius: CORE_THEME.borderRadius,
     backgroundColor: CORE_COLORS.middleCardContainer,
   },
   container: {
-    flex: 1,
+    flex: CORE_THEME.flex,
     flexDirection: "row",
     flexWrap: "wrap",
   },
   flatListContainer: {
-    flex: 1,
-    padding: 10,
+    flex: CORE_THEME.flex,
+    padding: CORE_THEME.padding,
   },
   border: {
-    borderRadius: 15,
+    borderRadius: CORE_THEME.MiddleContainerBorderRadius,
     justifyContent: "center",
     alignItems: "center",
-    margin: 5,
-    padding: 15,
+    margin: CORE_THEME.MiddleMargin,
+    padding: CORE_THEME.MiddlePadding,
   },
   item: {
-    margin: 5,
+    margin: CORE_THEME.MiddleMargin,
     fontFamily: "Montserrat_400Regular",
   },
   itemButton: {

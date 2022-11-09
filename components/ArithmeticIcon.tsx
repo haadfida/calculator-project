@@ -4,18 +4,18 @@ import { StyleSheet, Image, Pressable } from "react-native";
 import CORE_COLORS from "../constants/CORE_COLORS";
 import Imports from "../constants/imports";
 
-const ArithmeticIcon = (props) => {
-  const { handleOnPressArithmeticIcon, iconType } = props;
+const ArithmeticIcon = (props: {
+  handleOnPressArithmeticIcon: any;
+  iconType: string;
+  style: object;
+}) => {
+  const { handleOnPressArithmeticIcon, iconType, style } = props;
 
-  const filePathHandler = (props) => {
+  const filePathHandler = () => {
     if (iconType == "add") {
-      return (
-        <Image style={styles.icon} source={Imports.addIcon} />
-      );
+      return <Image source={Imports.addIcon} />;
     } else {
-      return (
-        <Image style={styles.icon} source={Imports.minusIcon} />
-      );
+      return <Image source={Imports.minusIcon} />;
     }
   };
   return (
@@ -25,7 +25,7 @@ const ArithmeticIcon = (props) => {
         {
           backgroundColor: pressed ? CORE_COLORS.pressed : CORE_COLORS.white,
         },
-        styles.wrapperCustom,
+        { ...styles.wrapperCustom, ...style},
       ]}
     >
       {filePathHandler}

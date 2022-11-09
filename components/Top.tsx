@@ -7,9 +7,14 @@ import Card from "./Card";
 import Counter from "./Counter";
 import Imports from "../constants/imports";
 
-const Top = (props) => {
+const Top = (props: {
+  currentSheetsCount: any;
+  onSheetCountUpdated: any;
+  weight: any;
+}) => {
   const { currentSheetsCount, onSheetCountUpdated, weight } = props;
-  const renderPaperContent = (props) => {
+  const renderPaperContent = () => {
+    let sourcePaperContent = null;
     if (currentSheetsCount <= 1 || currentSheetsCount < 5) {
       sourcePaperContent = Imports.lessThanFive;
     } else if (currentSheetsCount >= 5 && currentSheetsCount < 10) {
@@ -24,7 +29,7 @@ const Top = (props) => {
     return <Image source={sourcePaperContent} />;
   };
 
-  const configureCounter = (timesPressed) => {
+  const configureCounter = (timesPressed: number) => {
     let textLog = 0;
     if (timesPressed > 0) {
       textLog = timesPressed;
@@ -36,7 +41,7 @@ const Top = (props) => {
     return textLog;
   };
   return (
-    <View style={styles.screen}>
+    <>
       <Card style={styles.TopContainer}>
         {renderPaperContent()}
         <Counter configureCounter={configureCounter}></Counter>
@@ -49,7 +54,7 @@ const Top = (props) => {
           Per copy
         </Text>
       </Card>
-    </View>
+    </>
   );
 };
 
@@ -64,27 +69,27 @@ const styles = StyleSheet.create({
     backgroundColor: CORE_COLORS.topBackgroundColor,
     maxHeight: CORE_THEME.TopContainerMarginTopMaxHeight,
     borderTopLeftRadius: CORE_THEME.TopContainerMarginTopBorderTopLeftRadius,
-    borderTopRightRadius: CORE_THEME.borderTopRightRadius,
+    borderTopRightRadius: CORE_THEME.TopContainerMarginTopBorderTopRightRadius,
   },
   cardContainer: {
-    margintop: -16,
     flexDirection: "row",
     alignItems: "center",
-    paddingVertical: 10,
+    paddingVertical: CORE_THEME.TopCardContainerPaddingVertical,
     justifyContent: "space-between",
-    width: 400,
-    height: 60,
-    borderBottomLeftRadius: 10, //replace
-    borderBottomRightRadius: 10, //replace
+    width: CORE_THEME.TopCardContainerWidth,
+    height: CORE_THEME.TopCardContainerHeight,
+    borderBottomLeftRadius: CORE_THEME.TopContainerMarginTopBorderTopLeftRadius,
+    borderBottomRightRadius:
+      CORE_THEME.TopContainerMarginTopBorderTopRightRadius,
     backgroundColor: CORE_COLORS.cardTopContainer,
   },
   textSizePrimary: {
-    fontSize: 18,
+    fontSize: CORE_THEME.TopTextSizePrimary,
     fontWeight: "bold",
     fontFamily: "Montserrat_400Regular",
   },
   textSizeSecondary: {
-    fontSize: 12,
+    fontSize: CORE_THEME.TopTextSizeSeconary,
     fontFamily: "Montserrat_400Regular",
     fontWeight: "bold",
   },
