@@ -1,7 +1,7 @@
 // In App.js in a new project
 
 import React from "react";
-import { Image, Pressable } from "react-native";
+import { Button, Image, Pressable, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import "react-native-gesture-handler";
@@ -13,6 +13,22 @@ import Profile from "./components/Profile";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { useFonts } from "expo-font";
 const Drawer = createDrawerNavigator();
+import type { NativeStackScreenProps } from "@react-navigation/native-stack";
+
+type RootStackParamList = {
+  Home: undefined;
+  Profile: { userId: string };
+  Notifcations: { userId: string };
+  Settings: undefined;
+  Feed: { sort: "latest" | "top" } | undefined;
+};
+
+type Props = NativeStackScreenProps<
+  RootStackParamList,
+  "Notifcations",
+  "MyStack"
+>;
+
 
 
 const Stack = createStackNavigator();
@@ -27,64 +43,18 @@ function App() {
   }
   return (
     <NavigationContainer>
-      {/* <Stack.Navigator>
+      <Stack.Navigator
+      >
         <Stack.Screen
           name="Notifications"
           component={Notifications}
-          options={({ navigation, route }) => ({
-            headerTitleAlign: "left",
-            headerTitle: "Paper Calculator",
-            // Add a placeholder button without the `onPress` to avoid flicker
-            // https://reactnavigation.org/docs/header-buttons/
-            headerRight: () => (
-              <Pressable
-                onPress={() => {}}
-                style={({ pressed }) => [
-                  {
-                    backgroundColor: pressed ? "rgb(210, 230, 255)" : "white",
-                    marginEnd: 20,
-                  },
-                ]}
-              >
-                <Image source={require("./assets/menu-icon.png")} />
-              </Pressable>
-            ),
-          })}
+          options={{headerShown: false}}
         />
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="HomeScreen" component={HomeScreen} />
         <Stack.Screen name="Profile" component={Profile} />
         <Stack.Screen name="Settings" component={Settings} />
-      </Stack.Navigator> */}
-      <Drawer.Navigator useLegacyImplementation>
-      <Drawer.Screen
-          name="Notifications"
-          component={Notifications}
-          options={({ navigation, route } :any) => ({
-            headerTitleAlign: "left",
-            headerTitle: "Paper Calculator",
-            // Add a placeholder button without the `onPress` to avoid flicker
-            // https://reactnavigation.org/docs/header-buttons/
-            headerRight: () => (
-              <Pressable
-                onPress={() => {}}
-                style={({ pressed }) => [
-                  {
-                    backgroundColor: pressed ? "rgb(210, 230, 255)" : "white",
-                    marginEnd: 20,
-                  },
-                ]}
-              >
-                <Image source={require("./assets/menu-icon.png")} />
-              </Pressable>
-            ),
-          })}
-        />
-        <Drawer.Screen name="Home" component={Home} />
-        <Drawer.Screen name="HomeScreen" component={HomeScreen} />
-        <Drawer.Screen name="Profile" component={Profile} />
-        <Drawer.Screen name="Settings" component={Settings} />
-      </Drawer.Navigator>
+      </Stack.Navigator>
     </NavigationContainer>
   );
 }

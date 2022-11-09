@@ -23,8 +23,8 @@ function HomeScreen() {
     handleWeight();
   });
 
-  const handleOnSelectedPaperType = (button: { name: string }) => {
-    setSelectedPaperTyped(button.name);
+  const handleOnSelectedPaperType = (buttonValue: string) => {
+    setSelectedPaperTyped(buttonValue);
     setSelectedPaperSize("");
     setIsCustom(false);
   };

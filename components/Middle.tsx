@@ -16,8 +16,8 @@ import CORE_THEME from "../constants/CORE_THEME";
 interface MiddleProps {
   selectedPaperType: string;
   selectedPaperSize: string;
-  handleOnSelectedPaperType: (paperType: string) => void;
-  handleOnSelectionPaperSize: (paperSize: string) => void;
+  handleOnSelectedPaperType: any;
+  handleOnSelectionPaperSize: any;
   isCustom: boolean;
 }
 
