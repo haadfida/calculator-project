@@ -7,7 +7,11 @@ import Card from "./Card";
 import Counter from "./Counter";
 import Imports from "../constants/imports";
 
-const Top = (props: { currentSheetsCount: any; onSheetCountUpdated: any; weight: any; }) => {
+const Top = (props: {
+  currentSheetsCount: any;
+  onSheetCountUpdated: any;
+  weight: any;
+}) => {
   const { currentSheetsCount, onSheetCountUpdated, weight } = props;
   const renderPaperContent = () => {
     let sourcePaperContent = null;
@@ -37,7 +41,7 @@ const Top = (props: { currentSheetsCount: any; onSheetCountUpdated: any; weight:
     return textLog;
   };
   return (
-    <View>
+    <>
       <Card style={styles.TopContainer}>
         {renderPaperContent()}
         <Counter configureCounter={configureCounter}></Counter>
@@ -50,7 +54,7 @@ const Top = (props: { currentSheetsCount: any; onSheetCountUpdated: any; weight:
           Per copy
         </Text>
       </Card>
-    </View>
+    </>
   );
 };
 
@@ -68,7 +72,6 @@ const styles = StyleSheet.create({
     borderTopRightRadius: CORE_THEME.TopContainerMarginTopBorderTopRightRadius,
   },
   cardContainer: {
-    margintop: CORE_THEME.TopCardContainerMarginTop,
     flexDirection: "row",
     alignItems: "center",
     paddingVertical: CORE_THEME.TopCardContainerPaddingVertical,
@@ -76,7 +79,8 @@ const styles = StyleSheet.create({
     width: CORE_THEME.TopCardContainerWidth,
     height: CORE_THEME.TopCardContainerHeight,
     borderBottomLeftRadius: CORE_THEME.TopContainerMarginTopBorderTopLeftRadius,
-    borderBottomRightRadius: CORE_THEME.TopContainerMarginTopBorderTopRightRadius,
+    borderBottomRightRadius:
+      CORE_THEME.TopContainerMarginTopBorderTopRightRadius,
     backgroundColor: CORE_COLORS.cardTopContainer,
   },
   textSizePrimary: {

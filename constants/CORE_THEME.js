@@ -5,7 +5,6 @@ export default {
   TopContainerMarginTopMaxHeight: "80%",
   TopContainerMarginTopBorderTopLeftRadius: 10,
   TopContainerMarginTopBorderTopRightRadius: 10,
-  TopCardContainerMarginTop: -16,
   TopCardContainerFlexDirection: "row",
   TopCardContainerAlignItems: "center",
   TopCardContainerPaddingVertical: 10,
@@ -22,7 +21,6 @@ export default {
   borderRadius: 10,
   MiddleContainerWidth: 400,
   MiddleContainerHeight: 50,
-  marginTop: -16,
   MiddleMarginTop: 5,
   MiddleMarginHeight: 125,
   zero: 0,
@@ -40,6 +38,5 @@ export default {
   CounterTextPaddingBottom: 8,
   CounterSheetBoxPadding: 15,
   CounterSheetBorderRadius: 15,
-  CounterSheetMarginBottom: -15,
   CardPadding: 20,
 };

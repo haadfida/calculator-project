@@ -30,6 +30,8 @@ const Counter = (props: { configureCounter: (arg0: number) => any }) => {
       <ArithmeticIcon
         handleOnPressArithmeticIcon={handleOnPressAdd}
         iconType="add"
+        style={styles.plus}
+
       />
       <View style={styles.sheetBox}>
         <Input
@@ -45,6 +47,7 @@ const Counter = (props: { configureCounter: (arg0: number) => any }) => {
       <ArithmeticIcon
         handleOnPressArithmeticIcon={handleOnPressMinus}
         iconType="minus"
+        style={styles.minus}
       />
     </View>
   );
@@ -82,9 +85,20 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
     alignItems: "center",
     borderRadius: CORE_THEME.CounterSheetBorderRadius,
-    marginTop: CORE_THEME.marginTop,
-    marginBottom: CORE_THEME.CounterSheetMarginBottom,
+    // marginTop: CORE_THEME.marginTop,
+    // marginBottom: CORE_THEME.CounterSheetMarginBottom,
   },
+  minus:{
+    position: "absolute",
+    left: 30,
+    top: 55,
+  },
+  plus:{
+    position: "absolute",
+    left: 30,
+    top: -20,
+  }
+
 });
 
 export default Counter;
