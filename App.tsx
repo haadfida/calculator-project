@@ -28,8 +28,8 @@ function HomeScreen() {
     handleWeight();
   });
 
-  const handleOnSelectedPaperType = (button: { name: string }) => {
-    setSelectedPaperTyped(button.name);
+  const handleOnSelectedPaperType = (buttonName: string) => {
+    setSelectedPaperTyped(buttonName);
     setSelectedPaperSize("");
     setIsCustom(false);
   };
@@ -81,7 +81,6 @@ function HomeScreen() {
       <Top
         currentSheetsCount={currentSheetsCount}
         onSheetCountUpdated={setCurrentSheetsCount}
-        handleWeight={handleWeight}
         weight={weight}
       />
       <Middle

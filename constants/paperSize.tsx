@@ -42,4 +42,4 @@ export default {
     B6: { length: 128, width: 182, gram: 1.86 },
   },
   CUSTOM: {}
-};
+} as { [key: string]: any };

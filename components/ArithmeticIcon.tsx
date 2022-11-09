@@ -7,8 +7,9 @@ import Imports from "../constants/imports";
 const ArithmeticIcon = (props: {
   handleOnPressArithmeticIcon: any;
   iconType: string;
+  style: object;
 }) => {
-  const { handleOnPressArithmeticIcon, iconType } = props;
+  const { handleOnPressArithmeticIcon, iconType, style } = props;
 
   const filePathHandler = () => {
     if (iconType == "add") {
@@ -24,7 +25,7 @@ const ArithmeticIcon = (props: {
         {
           backgroundColor: pressed ? CORE_COLORS.pressed : CORE_COLORS.white,
         },
-        styles.wrapperCustom,
+        { ...styles.wrapperCustom, ...style},
       ]}
     >
       {filePathHandler}

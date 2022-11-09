@@ -53,21 +53,21 @@ const Bottom = (props: {
         value={length}
         text="Length"
         unit="mm"
-        maxValue="515"
+        maxValue={515}
       />
       <SliderContainer
         onSliderPress={onSliderPressWidth}
         value={width}
         text="Width"
         unit="mm"
-        maxValue="728"
+        maxValue={728}
       />
       <SliderContainer
         onSliderPress={onSliderPressGrammage}
         value={grammage}
         text="Grammage"
         unit="g"
-        maxValue="30"
+        maxValue={30}
       />
     </Card>
   );

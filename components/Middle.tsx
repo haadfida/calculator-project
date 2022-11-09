@@ -1,18 +1,27 @@
 import React from "react";
-import { View, StyleSheet, Text, FlatList, Pressable } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Text,
+  FlatList,
+  Pressable,
+  ListRenderItem,
+} from "react-native";
 
 import Card from "./Card";
 import CORE_COLORS from "../constants/CORE_COLORS";
 import PaperSizes from "../constants/paperSize";
 import CORE_THEME from "../constants/CORE_THEME";
 
-const Middle = (props: {
+interface MiddleProps {
   selectedPaperType: string;
   selectedPaperSize: string;
-  handleOnSelectedPaperType: any;
-  handleOnSelectionPaperSize: any;
+  handleOnSelectedPaperType: (paperType: string) => void;
+  handleOnSelectionPaperSize: (paperSize: string) => void;
   isCustom: boolean;
-}) => {
+}
+
+const Middle = (props: MiddleProps) => {
   const {
     selectedPaperType,
     selectedPaperSize,
@@ -67,8 +76,11 @@ const Middle = (props: {
       name: "CUSTOM",
     },
   ];
-  const renderItem = (item: any) => <Item title={item.item} />;
-
+  interface ItemInterface {
+    id:string;
+    item: string;
+  }
+  const renderItem = (item: ListRenderItem<ItemInterface>) => <Item title={item.item} />;
   return (
     <View>
       <Card style={styles.middleContainer}>
@@ -76,7 +88,7 @@ const Middle = (props: {
           {buttons.map((button) => {
             return (
               <Pressable
-                onPress={() => handleOnSelectedPaperType(button)}
+                onPress={() => handleOnSelectedPaperType(button.name)}
                 style={({ pressed }) => [
                   {
                     backgroundColor:
@@ -132,7 +144,6 @@ const styles = StyleSheet.create({
     borderTopRightRadius: CORE_THEME.borderRadius,
   },
   cardContainer: {
-    margintop: CORE_THEME.marginTop,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
