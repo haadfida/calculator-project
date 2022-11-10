@@ -1,31 +1,30 @@
-import React, { useState } from "react";
+import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import ArithmeticIcon from "./ArithmeticIcon";
 import CORE_COLORS from "../constants/CORE_COLORS";
 import CORE_THEME from "../constants/CORE_THEME";
 import Input from "./Input";
+import { useSelector, useDispatch } from 'react-redux';
+import { addOne, subOne, setCount } from "../actions/PaperCalculationActions";
 
-interface Props{
-  configureCounter: (arg0: number) => any;
-}
-
-const Counter: React.FC<Props>  = (props: Props) => {
-  const [timesPressed, setTimesPressed] = useState(0);
+const Counter: React.FC  = () => {
+  const dispatch = useDispatch()
+  const count = useSelector(state => state.count.count)
 
   const handleOnPressMinus = () => {
-    if (timesPressed > 0) {
-      setTimesPressed((current) => current - 1);
+    if (count > 0) {
+      dispatch(subOne());
     }
   };
 
   const handleOnPressAdd = () => {
-    setTimesPressed((current) => current + 1);
+    dispatch(addOne());
   };
 
   const handleOnEnterText = (value: string) => {
     let setValue = parseInt(value);
     if (setValue > 0) {
-      setTimesPressed(setValue);
+      dispatch(setCount(value));
     }
   };
 
@@ -42,7 +41,7 @@ const Counter: React.FC<Props>  = (props: Props) => {
           onChangeText={handleOnEnterText}
           style={{ ...styles.text, ...styles.textColor }}
         >
-          {props.configureCounter(timesPressed)}
+          {count}
         </Input>
         <Text style={{ ...styles.textSecondary, ...styles.textColor }}>
           Sheets

@@ -6,13 +6,15 @@ import CORE_THEME from "../constants/CORE_THEME";
 import Card from "./Card";
 import Counter from "./Counter";
 import Imports from "../constants/imports";
+import { useSelector, useDispatch } from 'react-redux';
 
 const Top = (props: {
-  currentSheetsCount: any;
   onSheetCountUpdated: any;
   weight: any;
 }) => {
-  const { currentSheetsCount, onSheetCountUpdated, weight } = props;
+  const { weight } = props;
+  const dispatch = useDispatch();
+  const currentSheetsCount = useSelector(state => state.count.count);
   const renderPaperContent = () => {
     let sourcePaperContent = null;
     if (currentSheetsCount <= 1 || currentSheetsCount < 5) {
@@ -29,22 +31,12 @@ const Top = (props: {
     return <Image source={sourcePaperContent} />;
   };
 
-  const configureCounter = (timesPressed: number) => {
-    let textLog = 0;
-    if (timesPressed > 0) {
-      textLog = timesPressed;
-    } else {
-      textLog = 0;
-    }
-    onSheetCountUpdated(timesPressed);
-
-    return textLog;
-  };
+ 
   return (
     <>
       <Card style={styles.TopContainer}>
         {renderPaperContent()}
-        <Counter configureCounter={configureCounter}></Counter>
+        <Counter></Counter>
       </Card>
       <Card style={styles.cardContainer}>
         <Text style={{ ...styles.textSizePrimary, ...styles.textColor }}>

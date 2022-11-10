@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { View, StyleSheet } from "react-native";
 import "react-native-gesture-handler";
 import Top from "./Top";
@@ -6,31 +6,45 @@ import Middle from "./Middle";
 import Bottom from "./Bottom";
 import PaperSizes from "../constants/paperSize";
 import Colors from "../constants/CORE_COLORS";
-const PaperCalculator: React.FC = () => {
-  const [length, setLength] = useState<number>(0);
-  const [width, setWidth] = useState<number>(0);
-  const [grammage, setGrammage] = useState<number>(0);
-  const [currentSheetsCount, setCurrentSheetsCount] = useState<number>(0);
-  const [weight, setWeight] = useState<number>(0);
-  const [isCustom, setIsCustom] = useState<boolean>(false);
+import { connect } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  setLength,
+  setWidth,
+  setGrammage,
+  setWeight,
+  setIsCustom,
+  setPaperType,
+  setPaperSize
+} from "../actions/PaperCalculationActions";
 
-  const [selectedPaperType, setSelectedPaperTyped] = useState<string>("CUSTOM");
-  const [selectedPaperSize, setSelectedPaperSize] = useState<string>("");
+const PaperCalculator: React.FC = () => {
+  const length = useSelector((state) => state.paper.length);
+  const width = useSelector((state) => state.paper.width);
+  const grammage = useSelector((state) => state.paper.grammage);
+  const dispatch = useDispatch();
+  const currentSheetsCount = useSelector((state) => state.count.count);
+  const weight = useSelector((state) => state.paper.weight);
+  const isCustom = useSelector((state) => state.paper.iscustom);
+  const selectedPaperType = useSelector((state) => state.paper.papertype);
+  const selectedPaperSize= useSelector((state) => state.paper.papersize);
 
   useEffect(() => {
     handleWeight();
   });
 
   const handleOnSelectedPaperType = (buttonValue: string) => {
-    setSelectedPaperTyped(buttonValue);
-    setSelectedPaperSize("");
-    setIsCustom(false);
+    dispatch(setPaperType(buttonValue));
+    dispatch(setPaperSize(""));
+    dispatch(setIsCustom(false));
   };
 
   const handleWeight = () => {
-    setWeight(
-      Math.floor(
-        Number(length * width * 0.01 * 0.01 * grammage * currentSheetsCount)
+    dispatch(
+      setWeight(
+        Math.floor(
+          Number(length * width * 0.01 * 0.01 * grammage * currentSheetsCount)
+        )
       )
     );
   };
@@ -41,39 +55,40 @@ const PaperCalculator: React.FC = () => {
   const papersizelist = PaperSizes[selectedPaperType.replace(/\s/g, "")];
 
   const handleOnSelectionPaperSize = (title: string) => {
-    setSelectedPaperSize(title);
-    setIsCustom(false);
+    dispatch(setPaperSize(title));
+    dispatch(setIsCustom(false));
     if (String([selectedPaperSize]) in papersizelist) {
-      setLength(papersizelist[selectedPaperSize]["length"]);
-      setWidth(papersizelist[selectedPaperSize]["width"]);
-      setGrammage(papersizelist[selectedPaperSize]["gram"]);
-      setWeight(length * width * 0.01 * 0.01 * grammage * currentSheetsCount);
+      dispatch(setLength(papersizelist[selectedPaperSize]["length"]));
+      dispatch(setWidth(papersizelist[selectedPaperSize]["width"]));
+      dispatch(setGrammage(papersizelist[selectedPaperSize]["gram"]));
+      dispatch(
+        setWeight(length * width * 0.01 * 0.01 * grammage * currentSheetsCount)
+      );
     }
   };
 
   const handleOnLengthChanged = (val: number) => {
-    setLength(val);
-    setIsCustom(true);
-    setSelectedPaperTyped("CUSTOM");
+    dispatch(setLength(val));
+    dispatch(setIsCustom(true));
+    dispatch(setPaperType("CUSTOM"));
   };
 
   const handleOnWidthChanged = (val: number) => {
-    setWidth(val);
-    setIsCustom(true);
-    setSelectedPaperTyped("CUSTOM");
+    dispatch(setWidth(val));
+    dispatch(setIsCustom(true));
+    dispatch(setPaperType("CUSTOM"));
   };
 
   const handleOnGrammmageChanged = (val: number) => {
-    setGrammage(val);
-    setIsCustom(true);
-    setSelectedPaperTyped("CUSTOM");
+    dispatch(setGrammage(val));
+    dispatch(setIsCustom(true));
+    dispatch(setPaperType("CUSTOM"));
   };
 
   return (
     <View style={styles.screen}>
       <Top
         currentSheetsCount={currentSheetsCount}
-        onSheetCountUpdated={setCurrentSheetsCount}
         handleWeight={handleWeight}
         weight={weight}
       />
@@ -105,4 +120,9 @@ const styles = StyleSheet.create({
   },
 });
 
-export default PaperCalculator;
+const mapStateToProps = (state: { count: any }) => {
+  const { count } = state;
+  return { count };
+};
+
+export default connect(mapStateToProps)(PaperCalculator);
