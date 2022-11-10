@@ -1,18 +1,16 @@
 // In App.js in a new project
 
 import React from "react";
-import { Button, Image, Pressable, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import "react-native-gesture-handler";
-import HomeScreen from "./components/HomeScreen";
-import Home from "./components/Home";
+import PaperCalculator from "./components/PaperCalculator";
+import TabNavigator from "./components/TabNavigator";
 import Notifications from "./components/Notifications";
 import Settings from "./components/Settings";
 import Profile from "./components/Profile";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { useFonts } from "expo-font";
-const Drawer = createDrawerNavigator();
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 
 type RootStackParamList = {
@@ -39,7 +37,7 @@ function App() {
   });
 
   if (!fontsLoaded) {
-    return <HomeScreen />;
+    return <PaperCalculator />;
   }
   return (
     <NavigationContainer>
@@ -50,8 +48,8 @@ function App() {
           component={Notifications}
           options={{headerShown: false}}
         />
-        <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen name="HomeScreen" component={HomeScreen} />
+        <Stack.Screen name="Home" component={TabNavigator} />
+        <Stack.Screen name="PaperCalculator" component={PaperCalculator} />
         <Stack.Screen name="Profile" component={Profile} />
         <Stack.Screen name="Settings" component={Settings} />
       </Stack.Navigator>

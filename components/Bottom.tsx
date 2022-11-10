@@ -4,8 +4,6 @@ import Card from "./Card";
 import SliderContainer from "./SliderContainer";
 
 import CORE_COLORS from "../constants/CORE_COLORS";
-import CORE_THEME from "../constants/CORE_THEME";
-
 
 const Bottom = (props: {
   onSliderPressLength: any;

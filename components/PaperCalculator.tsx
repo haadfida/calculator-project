@@ -4,11 +4,9 @@ import "react-native-gesture-handler";
 import Top from "./Top";
 import Middle from "./Middle";
 import Bottom from "./Bottom";
-import PaperSizes from "..//constants/paperSize";
-import Colors from "..//constants/CORE_COLORS";
-
-
-function HomeScreen() {
+import PaperSizes from "../constants/paperSize";
+import Colors from "../constants/CORE_COLORS";
+const PaperCalculator: React.FC = () => {
   const [length, setLength] = useState<number>(0);
   const [width, setWidth] = useState<number>(0);
   const [grammage, setGrammage] = useState<number>(0);
@@ -41,7 +39,7 @@ function HomeScreen() {
     values: string[];
   }
   const papersizelist = PaperSizes[selectedPaperType.replace(/\s/g, "")];
-  // console.log(papersizelist);
+
   const handleOnSelectionPaperSize = (title: string) => {
     setSelectedPaperSize(title);
     setIsCustom(false);
@@ -96,7 +94,7 @@ function HomeScreen() {
       />
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   screen: {
@@ -107,4 +105,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default HomeScreen;
+export default PaperCalculator;

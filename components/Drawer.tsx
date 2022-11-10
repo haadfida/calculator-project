@@ -1,6 +1,6 @@
 import * as React from "react";
 import { createDrawerNavigator } from "@react-navigation/drawer";
-import HomeScreen from "./HomeScreen";
+import HomeScreen from "./PaperCalculator";
 import Settings from "./Settings";
 import Profile from "./Profile";
 

@@ -1,6 +1,6 @@
 import * as React from "react";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
-import HomeScreen from "./HomeScreen";
+import HomeScreen from "./PaperCalculator";
 import Settings from "./Settings";
 
 const Tab = createMaterialTopTabNavigator();
@@ -14,6 +14,6 @@ function Tabs() {
   );
 }
 
-export default function Home() {
+export default function TabNavigator() {
   return <Tabs />;
 }

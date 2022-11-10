@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet, Image } from "react-native";
+import { Text, StyleSheet, Image } from "react-native";
 
 import CORE_COLORS from "../constants/CORE_COLORS";
 import CORE_THEME from "../constants/CORE_THEME";
