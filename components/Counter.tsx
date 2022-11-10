@@ -5,7 +5,11 @@ import CORE_COLORS from "../constants/CORE_COLORS";
 import CORE_THEME from "../constants/CORE_THEME";
 import Input from "./Input";
 
-const Counter = (props: { configureCounter: (arg0: number) => any }) => {
+interface Props{
+  configureCounter: (arg0: number) => any;
+}
+
+const Counter: React.FC<Props>  = (props: Props) => {
   const [timesPressed, setTimesPressed] = useState(0);
 
   const handleOnPressMinus = () => {

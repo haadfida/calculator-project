@@ -5,7 +5,6 @@ import Slider from "@react-native-community/slider";
 import CORE_COLORS from "../constants/CORE_COLORS";
 import CORE_THEME from "../constants/CORE_THEME";
 
-
 const SliderContainer = (props: { text: string; value: number; unit: string; maxValue: number; onSliderPress: any; }) => {
   const { text, value, unit, maxValue, onSliderPress } = props;
 

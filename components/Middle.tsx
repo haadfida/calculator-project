@@ -16,12 +16,12 @@ import CORE_THEME from "../constants/CORE_THEME";
 interface MiddleProps {
   selectedPaperType: string;
   selectedPaperSize: string;
-  handleOnSelectedPaperType: (paperType: string) => void;
-  handleOnSelectionPaperSize: (paperSize: string) => void;
+  handleOnSelectedPaperType: any;
+  handleOnSelectionPaperSize: any;
   isCustom: boolean;
 }
 
-const Middle = (props: MiddleProps) => {
+const Middle: React.FC<MiddleProps> = (props: MiddleProps) => {
   const {
     selectedPaperType,
     selectedPaperSize,
