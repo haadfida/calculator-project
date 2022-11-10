@@ -21,7 +21,7 @@ interface MiddleProps {
   isCustom: boolean;
 }
 
-const Middle = (props: MiddleProps) => {
+const Middle: React.FC<MiddleProps> = (props: MiddleProps) => {
   const {
     selectedPaperType,
     selectedPaperSize,
